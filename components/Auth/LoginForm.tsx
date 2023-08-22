@@ -6,10 +6,7 @@ import { useRecoilState } from "recoil";
 export default function LoginForm() {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginValue);
   const LoginHandler = () => {
-    console.log("_________________-");
-    console.log(isLoggedIn);
     setIsLoggedIn(true);
-    console.log(isLoggedIn);
   };
   return (
     <div className=" flex flex-col items-center w-LoginForm h-LoginForm">
@@ -39,7 +36,8 @@ export default function LoginForm() {
         />
         <div
           //   type="submit"
-          className=" w-[250px] p-1 mt-10 rounded-2xl text-white bg-LoginBlue"
+          className=" w-[250px] p-1 mt-10 rounded-2xl text-white bg-LoginBlue
+           flex justify-center items-center"
           onClick={LoginHandler}
         >
           로그인
