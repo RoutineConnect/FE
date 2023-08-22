@@ -16,20 +16,29 @@ export default function AuthChek() {
   useEffect(() => {
     //  로그인이 안되어있는 경우
     if (!isLoggedIn) {
-      //  로그인 상태게 false일때 현재 url이 socialsignup일 경우에는 login으로 안보냄
-      if (pathname.toString() === "/accounts/socialsignup") {
-        return;
-      }
       //  로그인창으로 이동시킴
       router.push("/accounts/login");
     }
     // 로그인이 되어있는 경우
     else {
-      //  현재 url이 "/" 상태일때에는 main페이지로 이동시킴
-      if (pathname.toString() === "/") {
+      //  "account/login"링크로 접속시 "/main"으로 이동시킴
+      //  "/"링크로 접속시 "/main"으로 이동시킴
+      if (
+        pathname.toString() === "/" ||
+        pathname.toString() === "/accounts/login"
+      ) {
+        console.log("로그인 됨");
         router.push("/main");
       }
     }
   }, [isLoggedIn, router]);
   return null;
 }
+
+// 로그인 O
+// => /account/login링크로 접속시 /main으로 이동시킴
+// => /링크로 접속시 /main으로 이동시킴
+// => 나머지의 경우에는 전부 그냥 return
+
+// 로그인 X
+// =>모든 링크로 접속시 /account/login으로 이동시킴

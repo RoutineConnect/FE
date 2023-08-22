@@ -1,12 +1,17 @@
 "use client";
 
 import IPlus from "@/Icon/IPlus";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function MainRoutineAdd() {
+  const router = useRouter();
   const [onClicked, setOnClicked] = useState(false);
   const AddBtnHandler = () => {
     setOnClicked(!onClicked);
+  };
+  const AddRoutineHandler = () => {
+    router.push("/main/addroutine");
   };
 
   return (
@@ -31,7 +36,10 @@ export default function MainRoutineAdd() {
             <div>
               {/* 루틴 추가 */}
               <div className=" absolute -top-[120px] -left-70 ">
-                <div className=" w-[120px] h-[40px] bg-violet-500 flex justify-center items-center rounded-full">
+                <div
+                  className=" w-[120px] h-[40px] bg-violet-500 flex justify-center items-center rounded-full"
+                  onClick={AddRoutineHandler}
+                >
                   <span className=" text-white ">루틴 추가</span>
                 </div>
               </div>
