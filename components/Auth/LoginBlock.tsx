@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 export default function LoginBlock() {
-  const [block, setBlock] = useState(true);
+  const [block, setBlock] = useState(false);
   const [radiusClass, setRadiusClass] = useState("rounded-s-2xl");
   const blockHandler = () => {
     setBlock(!block);
@@ -20,7 +20,7 @@ export default function LoginBlock() {
 
   return (
     <div
-      className={` w-LoginForm h-LoginForm bg-LoginBlue absolute transition-transform ease-in duration-500 ${
+      className={` w-LoginForm h-LoginForm bg-theme_d absolute transition-transform ease-in duration-500 ${
         block ? " translate-y-0" : "translate-x-full "
       } ${radiusClass}`}
     >
@@ -31,14 +31,14 @@ export default function LoginBlock() {
           className="mb-20 w-[150px] h-[40px] bg-white flex justify-center items-center rounded-3xl relative"
         >
           <span
-            className={` fixed text-LoginBlue font-semibold transition-opacity duration-500 ${
+            className={` fixed text-theme_e font-semibold transition-opacity duration-500 ${
               block ? "opacity-100" : "opacity-0"
             }`}
           >
             Login
           </span>
           <span
-            className={` fixed text-LoginBlue font-semibold transition-opacity duration-500 ${
+            className={` fixed text-theme_e font-semibold transition-opacity duration-500 ${
               block ? "opacity-0" : "opacity-100"
             }`}
           >

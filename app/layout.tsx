@@ -23,6 +23,27 @@ export default function RootLayout({
         <RecoilSet>
           {/* 전체적으로 로그인 상태를 확인해주는 함수 호출 */}
           <AuthChek />
+          {/* test */}
+          <div className=" flex w-[300px] justify-around absolute top-5 left-5">
+            <div className=" w-10 h-10 bg-theme_a text-white flex justify-center items-center">
+              a
+            </div>
+            <div className=" w-10 h-10 bg-theme_b text-white flex justify-center items-center">
+              b
+            </div>
+            <div className=" w-10 h-10 bg-theme_c text-white flex justify-center items-center">
+              c
+            </div>
+            <div className=" w-10 h-10 bg-theme_d text-white flex justify-center items-center">
+              d
+            </div>
+            <div className=" w-10 h-10 bg-theme_e text-white flex justify-center items-center">
+              e
+            </div>
+            <div className=" w-10 h-10 bg-theme_f text-white flex justify-center items-center">
+              f
+            </div>
+          </div>
           {children}
         </RecoilSet>
       </body>
