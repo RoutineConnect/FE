@@ -1,7 +1,7 @@
 export default function SignupForm() {
   return (
     <div className=" flex flex-col items-center w-LoginForm h-LoginForm">
-      <div className=" mt-24 font-bold text-3xl text-theme_b">Sign-up</div>
+      <div className=" mt-[86px] font-bold text-3xl text-theme_b">Sign-up</div>
       <span className=" mt-5 text-gray-300">Create your Account</span>
       <form className=" flex flex-col mt-5">
         <input
@@ -24,9 +24,11 @@ export default function SignupForm() {
           placeholder="PASSWORD CHECK"
           className=" focus:outline-0  focus:border-theme_c  w-LoginInput h-LoginInput border border-gray-400 rounded-md mt-5 p-1 pl-4 placeholder:text-sm"
         />
+        {/* 에러 Form */}
+        <div className=" mt-3"></div>
         <button
           type="submit"
-          className=" w-LoginInput h-LoginInput p-1 mt-5 rounded-md text-white bg-theme_c"
+          className=" w-LoginInput h-LoginInput p-1 mt-2 rounded-md text-white bg-theme_c"
         >
           회원가입
         </button>

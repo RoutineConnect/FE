@@ -14,7 +14,7 @@ module.exports = {
       },
       height: {
         HRoutine: "700px",
-        LoginForm: "650px",
+        LoginForm: "700px",
         LoginInput: "50px",
       },
       fontSize: {
