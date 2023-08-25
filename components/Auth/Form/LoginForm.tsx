@@ -6,6 +6,7 @@ import googleBtn from "../../../image/google-login.png";
 import kakaoBtn from "../../../image/kakao-login.png";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
+import ErrorForm from "./ErrorForm";
 
 interface ILoginForm {
   ID: string;
@@ -18,7 +19,9 @@ export default function LoginForm() {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<ILoginForm>();
+  } = useForm<ILoginForm>({
+    mode: "onChange",
+  });
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginValue);
   const LoginHandler = () => {
     setIsLoggedIn(true);
@@ -44,6 +47,7 @@ export default function LoginForm() {
           placeholder="ID"
           className=" focus:outline-0 focus:border-theme_a w-LoginInput h-LoginInput border border-gray-400 rounded-md  p-1 pl-4 placeholder:text-sm "
         />
+        <ErrorForm message={errors.ID?.message} />
         {/* 비밀번호 */}
         <input
           type="password"
