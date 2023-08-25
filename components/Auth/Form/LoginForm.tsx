@@ -5,12 +5,12 @@ import { useRecoilState } from "recoil";
 import googleBtn from "../../../image/google-login.png";
 import kakaoBtn from "../../../image/kakao-login.png";
 import Image from "next/image";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
+import ErrorForm from "./ErrorForm";
 
 interface ILoginForm {
   ID: string;
   password: string;
-  result: string;
 }
 
 export default function LoginForm() {
@@ -18,19 +18,27 @@ export default function LoginForm() {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<ILoginForm>();
+  } = useForm<ILoginForm>({
+    mode: "onChange",
+  });
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginValue);
   const LoginHandler = () => {
     setIsLoggedIn(true);
   };
+  const onSubmitValid: SubmitHandler<ILoginForm> = () => {
+    return null;
+  };
   return (
     <div className=" flex flex-col items-center w-LoginForm h-LoginForm">
       {/* 타이틀 */}
-      <div className=" mt-24 font-bold text-3xl text-theme_b">Login</div>
+      <div className=" mt-[86px] font-bold text-3xl text-theme_b">Login</div>
       {/* 서브 타이틀 */}
       <span className=" mt-5 text-gray-300">Login to your Account</span>
       {/* 로그인 form */}
-      <form className=" flex flex-col mt-5">
+      <form
+        onSubmit={handleSubmit(onSubmitValid)}
+        className=" flex flex-col mt-5 items-center"
+      >
         {/* id */}
         <input
           {...register("ID", {
@@ -46,14 +54,22 @@ export default function LoginForm() {
         />
         {/* 비밀번호 */}
         <input
+          {...register("password", {
+            required: "비밀번호를 입력해주세요",
+          })}
           type="password"
           placeholder="PASSWORD"
           className=" focus:outline-0  focus:border-theme_a  w-LoginInput h-LoginInput border border-gray-400 rounded-md mt-5 p-1 pl-4 placeholder:text-sm"
         />
+        {/* 에러 Form */}
+        <div className={` mt-3 flex flex-col items-center `}>
+          <ErrorForm message={errors.ID?.message} />
+          <ErrorForm message={errors.password?.message} />
+        </div>
         {/* 로그인 버튼 */}
         <div
           //   type="submit"
-          className=" w-LoginInput h-LoginInput p-1 mt-5 rounded-md text-white bg-theme_c
+          className=" w-LoginInput h-LoginInput p-1 mt-2 rounded-md text-white bg-theme_c
            flex justify-center items-center"
           onClick={LoginHandler}
         >
@@ -66,7 +82,7 @@ export default function LoginForm() {
         <div className=" w-[100px] h-[0.2px] bg-gray-300"></div>
       </div>
       {/* 소셜 로그인 */}
-      <div className=" mt-3 flex flex-col  w-LoginInput justify-between -z-[99999] ">
+      <div className=" mt-2 flex flex-col  w-LoginInput justify-between -z-[99999] ">
         {/* kakao */}
         <div className="flex justify-center items-center w-LoginInput h-LoginInput p-2 bg-white rounded-xl mt-2 shadow-md">
           {/* contents Wrapper */}
