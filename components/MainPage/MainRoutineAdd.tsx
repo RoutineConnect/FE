@@ -21,15 +21,16 @@ export default function MainRoutineAdd() {
         ${!onClicked && "hidden"}
         `}
       />
-      <div className=" absolute w-12 h-12 rounded-full -right-5 -bottom-5 bg-blue-400 shadow-2xl">
+      <div className=" absolute w-24 h-12 rounded-full -right-[120px] bottom-5 bg-blue-300 bg-opacity-70 shadow-2xl">
         <div className=" relative w-full h-full">
           <div
-            className={`flex justify-center items-center w-full h-full ${
-              onClicked ? "rotate-45" : null
-            } duration-100`}
+            className={`flex justify-center items-center w-full h-full
+            `}
+            // ${onClicked ? "rotate-45" : null} duration-100
             onClick={AddBtnHandler}
           >
-            <IPlus />
+            <span className=" font-semibold">추가하기</span>
+            {/* <IPlus /> */}
             {/* 추가 버튼 */}
           </div>
           {onClicked ? (

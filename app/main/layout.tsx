@@ -8,15 +8,15 @@ export default function MainLayout({
 }) {
   return (
     // Wrapper
-    <div className=" flex justify-between w-full h-screen">
+    <div className=" flex justify-between w-full h-screen bg-blue-200 bg-opacity-20">
       {/* col - sideBar - left */}
-      <div className=" bg-slate-300 w-sideBar h-screen">
+      <div className=" bg-white w-sideBar h-screen">
         <Sidebar />
       </div>
       {/* main */}
-      <div>{children}</div>
+      <div className="">{children}</div>
       {/* col - sideBar - right */}
-      <div className=" bg-slate-300 w-sideBar h-screen"></div>
+      <div className=" bg-white w-sideBar h-screen"></div>
     </div>
   );
 }
