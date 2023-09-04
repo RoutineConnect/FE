@@ -5,19 +5,16 @@ import MainRoutineItem from "@/components/MainPage/MainRoutineItem";
 export default function MainPage() {
   return (
     // wrapper
-    <div className="flex flex-col items-center pt-10 h-screen">
+    <div className="flex flex-col items-center pt-10 px-5 h-screen  min-w-[446px]">
       {/* Date */}
-      <div className=" flex justify-center items-center bg-white w-[770px] h-[120px] rounded-xl ">
+      <div className=" flex justify-center items-center bg-white w-full py-3 rounded-xl ">
         <MainDate />
       </div>
-      {/* Routine / challenge */}
-      <div className=" flex flex-col justify-center items-center relative bg-white w-[770px]  h-[730px] mt-5 rounded-xl">
-        {/* 편집 & 추가 버튼 */}
-        <AddBtn />
-        <div className=" h-full rounded-lg overflow-auto scrollbar-none mb-3">
-          <MainRoutineItem />
-        </div>
+      <div className=" w-full h-full overflow-auto scrollbar-none mt-5">
+        <MainRoutineItem />
       </div>
+      {/* 편집 & 추가 버튼 */}
+      <AddBtn />
     </div>
   );
 }

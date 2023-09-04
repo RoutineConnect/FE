@@ -1,4 +1,5 @@
-import Sidebar from "@/components/Layout/SideBar-L";
+import Sidebar_L from "@/components/Layout/SideBar-L";
+import SideBar_R from "@/components/Layout/SideBar-R";
 import React from "react";
 
 export default function MainLayout({
@@ -8,15 +9,17 @@ export default function MainLayout({
 }) {
   return (
     // Wrapper
-    <div className=" flex justify-between w-full h-screen bg-blue-200 bg-opacity-20">
+    <div className=" flex justify-between w-full h-screen bg-color_bg">
       {/* col - sideBar - left */}
-      <div className=" bg-white w-sideBar h-screen">
-        <Sidebar />
+      <div className=" bg-white h-screen">
+        <Sidebar_L />
       </div>
       {/* main */}
-      <div className="">{children}</div>
+      <div className=" w-full">{children}</div>
       {/* col - sideBar - right */}
-      <div className=" bg-white w-sideBar h-screen"></div>
+      <div className=" bg-white h-screen">
+        <SideBar_R />
+      </div>
     </div>
   );
 }
