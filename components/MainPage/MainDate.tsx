@@ -9,7 +9,7 @@ function achievements(achive: number, date: number) {
   if (date === Today) {
     return "blue-600";
   } else if (date > Today) {
-    return "gray-400";
+    return "color_sub_text";
   }
 
   if (achive === 100) {
@@ -40,24 +40,24 @@ export default function MainDate() {
     setNow(date);
   };
   return (
-    <div className=" w-[650px] flex justify-between bg-white">
+    <div className=" w-2/5 flex justify-center space-x-2">
       {/* 색 불러오기 */}
       <div className=" bg-red-600 hidden"></div>
       <div className=" bg-yellow-400 hidden"></div>
       <div className=" bg-green-400 hidden"></div>
-      <div className=" bg-gray-400 hidden"></div>
+      <div className=" bg-color_sub_text hidden"></div>
       <div className=" bg-blue-600 hidden"></div>
       {orderedD.map((d) => {
         return (
           <div
             key={d.date}
-            className={`flex flex-col justify-center items-center`}
+            className="flex flex-col justify-center items-center cursor-pointer"
             onClick={() => DateChangeHandler(d.date)}
           >
             <div
               className={`w-[62px] h-[68px] rounded-lg flex flex-col justify-center items-center ${
-                d.date === now ? " bg-blue-300" : null
-              } bg-opacity-70 `}
+                d.date === now ? " bg-color_bg" : null
+              } `}
             >
               <span className=" text-base font-semibol opacity-60">
                 {d.dayOfWeek}

@@ -7,8 +7,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        pretendard: ["Pretendard", "sans-serif"],
+      },
       width: {
-        sideBar: "350px",
+        sideBar: "277px",
         LoginForm: "500px",
         LoginInput: "250px",
       },
@@ -18,7 +21,7 @@ module.exports = {
         LoginInput: "50px",
       },
       fontSize: {
-        sideBar: ["20px", "28px"],
+        sideBar: ["16px", "17.5px"],
       },
       gridTemplateColumns: {
         MainRoutine: " 100px 450px 80px",
@@ -28,13 +31,11 @@ module.exports = {
       },
       colors: {
         kakaoBg: "#FEE500",
-        LoginBlue: "#1FA0C7",
-        theme_a: "#05161A",
-        theme_b: "#072E33",
-        theme_c: "#0C7075",
-        theme_d: "#0F969C",
-        theme_e: "#6DA5C0",
-        theme_f: "#294D61",
+        color_bg: "#EFF2F8",
+        color_sub_text: "#C3C7D5",
+        color_main_text: "#7A83D0",
+        color_accent_text: "#294694",
+        color_default_text: "#2B3745",
       },
     },
   },

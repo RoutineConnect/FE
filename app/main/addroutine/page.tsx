@@ -1,51 +1,105 @@
+import PrivateSet from "@/components/MainPage/AddRoutine/PrivateSet";
+import SaveBtn from "@/components/MainPage/AddRoutine/SaveBtn";
+
 export default function addroutine() {
   return (
-    // Wrapper
-    <div className=" flex flex-col justify-items-start text-xl space-y-10 my-[200px] mr-[50px]">
-      {/* 루틴이름-input */}
-      <div className="flex justify-between items-center bg-gray-300 bg-opacity-75 px-[15px] py-3 rounded-xl font-semibold">
-        <span>루틴 이름</span>
-        <input type="text" className="sr-only ml-5 text-2xl  "/>
+    <div className="flex flex-col items-center  w-full min-w-[446px] h-full px-10 text-color_default_text relative">
+      {/* title */}
+      <div className=" mt-7">
+        <span className=" font-semibold">루틴 추가하기</span>
       </div>
-      {/* 알람-wrapper */}
-      <div>
-      <div className="flex justify-between items-center bg-gray-300 bg-opacity-75 px-[15px] py-3 rounded-t-lg border-b border-black font-semibold">
-      <span>알람</span>
-      <input type="checkbox" className="sr-only ml-9 transform scale-125 w-6 h-6"></input>
-      <span className="bg-gray-100 relative w-20 h-10 rounded-full">
-      <span className="w-2/5 h-4/5 bg-gray-300 absolute rounded-full left-1 top-1"></span>
-      </span>
+      {/* 루틴 이름 */}
+      <input
+        className=" mt-24 w-full h-11 rounded-lg px-7 placeholder:text-color_sub_text placeholder:text-sm outline-none"
+        type="text"
+        placeholder="루틴이름을 입력하세요"
+      />
+      {/* 언제할까요 */}
+      <div className=" w-full flex flex-col mt-8">
+        {/* title */}
+        <span className=" flex justify-start font-semibold">언제 할까요</span>
+        {/* 해시태그 */}
+        <div className=" flex flex-wrap w-full text-sm font-semibold mt-3 space-x-2">
+          <div className=" px-4 py-1 mb-2 bg-white rounded-xl hover:border hover:border-color_main_text">
+            <span>출근길</span>
+          </div>
+          <div className=" px-4 py-1 mb-2 bg-white rounded-xl hover:border hover:border-color_main_text">
+            <span>퇴근 후</span>
+          </div>
+          <div className=" px-4 py-1 mb-2 bg-white rounded-xl hover:border hover:border-color_main_text">
+            <span>점심 먹고</span>
+          </div>
+          <div className=" px-4 py-1 mb-2 bg-white rounded-xl hover:border hover:border-color_main_text">
+            <span>출근길</span>
+          </div>
+          <div className=" px-4 py-1 mb-2 bg-white rounded-xl hover:border hover:border-color_main_text">
+            <span>일어나자 마자</span>
+          </div>
+        </div>
+        {/* 입력 */}
+        <input
+          className=" mt-3 w-full h-11 rounded-lg px-7 placeholder:text-color_sub_text placeholder:text-sm outline-none"
+          type="text"
+          placeholder=" 예시) 8시, 출근길, 식사 후"
+        />
       </div>
-
-    
-      {/* 시간 */}
-      <div className="flex justify-between items-center bg-gray-300 bg-opacity-75 px-[15px] py-3 rounded-b-lg font-semibold">
-        <span>시간</span>
-        {/* 페이지 이동 버튼 */}
-        <div>
-        <input type="button" value="ex) 8시/출근길" className="bg-gray-300 text-black px-[50px] py-2 rounded-3xl hover:bg-gray-400 font-light"/>
+      {/* saperator */}
+      <div className=" h-[1px] w-full bg-color_sub_text mt-5 mb-5"></div>
+      {/* 시작일 */}
+      <div className=" flex justify-between w-full">
+        {/* title */}
+        <span className=" font-semibold">시작일</span>
+        {/* 캘린더 선택 */}
+        <div className=" text-color_accent_text">2023.08.31</div>
       </div>
+      {/* saperator */}
+      <div className=" h-[1px] w-full bg-color_sub_text mt-5 mb-5"></div>
+      {/* 반복주기 */}
+      <div className=" flex flex-col w-full">
+        {/* titltle */}
+        <span className=" font-semibold">반복주기</span>
+        {/* 요일 wrapper */}
+        <div className=" flex justify-center">
+          {/* 요일 선택 기능 */}
+          <div className=" mt-7 flex w-full max-w-[700px] h-10 justify-between">
+            {/* 요일 예시 ui */}
+            <div className="flex flex-col bg-white px-2 justify-center items-center rounded-lg">
+              <span className=" text-red-600">일</span>
+              <div className=" w-1 h-1 rounded-full bg-color_accent_text"></div>
+            </div>
+            <div className="flex flex-col  px-2 justify-center items-center rounded-lg">
+              <span>월</span>
+            </div>
+            <div className="flex flex-col  px-2 justify-center items-center rounded-lg">
+              <span>화</span>
+            </div>
+            <div className="flex flex-col px-2 justify-center items-center rounded-lg">
+              <span>수</span>
+            </div>
+            <div className="flex flex-col bg-white px-2 justify-center items-center rounded-lg">
+              <span>목</span>
+              <div className=" w-1 h-1 rounded-full bg-color_accent_text"></div>
+            </div>
+            <div className="flex flex-col bg-white px-2 justify-center items-center rounded-lg">
+              <span>금</span>
+              <div className=" w-1 h-1 rounded-full bg-color_accent_text"></div>
+            </div>
+            <div className="flex flex-col px-2 justify-center items-center rounded-lg">
+              <span className=" text-blue-600">토</span>
+            </div>
+          </div>
+        </div>
       </div>
+      {/* saperator */}
+      <div className=" h-[1px] w-full bg-color_sub_text mt-10 mb-5"></div>
+      {/* 공개 설정 */}
+      <div className=" flex w-full justify-between">
+        <span className=" font-semibold">비공개</span>
+        {/* OnOff Btn */}
+        <PrivateSet />
       </div>
-    
-      {/* 반복주기-wrapper 반복설정이랑 반복주기 div하나 */}
-      <div className=" flex justify-between items-center bg-gray-300 bg-opacity-75 px-[15px] py-3 rounded-xl font-semibold ">
-        {/* 반복설정-text */}
-        <span>반복주기</span>
-        <input type="button" value="월,화,수,목,금,토,일 >" className="font-light"></input>
-      </div>
-      {/* 비공개-checkbox */}
-      <div className="flex justify-between items-center bg-gray-300 bg-opacity-75 px-[15px] py-3 rounded-xl font-semibold">
-        <span>비공개</span>
-        <input type="checkbox" className="sr-only ml-9 transform scale-125 w-6 h-6 "></input>
-        <span className="bg-gray-100 relative w-20 h-10 rounded-full">
-      <span className="w-2/5 h-4/5 bg-gray-300 absolute rounded-full left-1 top-1"></span>
-      </span>
-      </div>
-      {/* 추가하기-div or button */}
-      <div>
-        <input type="button" value="추가하기" className="bg-gray-300 text-black px-[300px] py-3 rounded-3xl hover:bg-gray-400 font-semibold"/>
-      </div>
+      {/* 추가 버튼 */}
+      <SaveBtn />
     </div>
   );
 }

@@ -13,10 +13,10 @@ export default function AddBtn() {
     route.push("/main/editroutine");
   };
   return (
-    <div className=" w-full h-[10px] flex justify-end items-center mr-14 mt-5 mb-5">
+    <div className=" w-full h-[10px] flex justify-end items-center mt-5 mb-7">
       <div
         onClick={AddBtnHandler}
-        className=" h-[30px] flex items-center text-gray-400 hover:text-theme_f mr-3 border border-gray-400 hover:border-theme_f p-[1px] rounded-lg "
+        className=" h-[30px] flex items-center text-gray-400 hover:text-color_accent_text mr-3 border border-gray-400 hover:border-color_accent_text hover:bg-white p-[1px] rounded-lg "
       >
         <span className=" mr-1 pl-2">추가하기</span>
         <div className=" w-6 mr-1">
@@ -25,7 +25,7 @@ export default function AddBtn() {
       </div>
       <div
         onClick={EditBtnHandler}
-        className=" h-[30px] flex items-center text-gray-400 hover:text-blue-400 border border-gray-400 hover:border-blue-400 p-[2px] rounded-lg"
+        className=" h-[30px] flex items-center text-gray-400 hover:text-color_accent_text border border-gray-400 hover:border-color_accent_text hover:bg-white p-[2px] rounded-lg"
       >
         <span className=" mr-2 pl-2">편집</span>
         <div className=" w-5 mr-2">

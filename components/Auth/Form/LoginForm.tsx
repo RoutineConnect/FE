@@ -31,9 +31,11 @@ export default function LoginForm() {
   return (
     <div className=" flex flex-col items-center w-LoginForm h-LoginForm">
       {/* 타이틀 */}
-      <div className=" mt-[86px] font-bold text-3xl text-theme_b">Login</div>
+      <div className=" mt-[86px] font-bold text-3xl text-color_main_text">
+        Login
+      </div>
       {/* 서브 타이틀 */}
-      <span className=" mt-5 text-gray-300">Login to your Account</span>
+      <span className=" mt-5 text-color_sub_text">Login to your Account</span>
       {/* 로그인 form */}
       <form
         onSubmit={handleSubmit(onSubmitValid)}
@@ -49,8 +51,8 @@ export default function LoginForm() {
             },
           })}
           type="text"
-          placeholder="ID"
-          className=" focus:outline-0 focus:border-theme_a w-LoginInput h-LoginInput border border-gray-400 rounded-md  p-1 pl-4 placeholder:text-sm "
+          placeholder="아이디"
+          className=" focus:outline-0 focus:border-color_accent_text w-LoginInput h-LoginInput border border-color_sub_text rounded-md  p-1 pl-4 placeholder:text-sm "
         />
         {/* 비밀번호 */}
         <input
@@ -58,8 +60,8 @@ export default function LoginForm() {
             required: "비밀번호를 입력해주세요",
           })}
           type="password"
-          placeholder="PASSWORD"
-          className=" focus:outline-0  focus:border-theme_a  w-LoginInput h-LoginInput border border-gray-400 rounded-md mt-5 p-1 pl-4 placeholder:text-sm"
+          placeholder="비밀번호"
+          className=" focus:outline-0  focus:border-color_accent_text  w-LoginInput h-LoginInput border border-color_sub_text rounded-md mt-5 p-1 pl-4 placeholder:text-sm"
         />
         {/* 에러 Form */}
         <div className={` mt-3 flex flex-col items-center `}>
@@ -69,7 +71,7 @@ export default function LoginForm() {
         {/* 로그인 버튼 */}
         <div
           //   type="submit"
-          className=" w-LoginInput h-LoginInput p-1 mt-2 rounded-md text-white bg-theme_c
+          className=" w-LoginInput h-LoginInput p-1 mt-2 rounded-md text-white bg-color_main_text
            flex justify-center items-center"
           onClick={LoginHandler}
         >
@@ -112,13 +114,13 @@ export default function LoginForm() {
       <div className=" text-xs">
         <div className=" flex justify-center items-center  mt-7">
           <span className=" text-gray-300">아이디를 잃어버렸나요?</span>
-          <div className="ml-3 text-gray-400 hover:text-theme_c">
+          <div className="ml-3 text-gray-400 hover:text-color_main_text">
             아이디 찾기
           </div>
         </div>
         <div className=" flex justify-center items-center  mt-1 ">
           <span className=" text-gray-300">비밀번호를 잃어버렸나요?</span>
-          <div className=" ml-3 text-gray-400 hover:text-theme_c">
+          <div className=" ml-3 text-gray-400 hover:text-color_main_text">
             비밀번호 찾기
           </div>
         </div>

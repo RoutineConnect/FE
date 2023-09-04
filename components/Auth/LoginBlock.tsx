@@ -20,29 +20,29 @@ export default function LoginBlock() {
 
   return (
     <div
-      className={` w-LoginForm h-LoginForm bg-theme_d absolute transition-transform ease-in duration-500 ${
+      className={` w-LoginForm h-LoginForm bg-color_bg absolute transition-transform ease-in duration-500 ${
         block ? " translate-y-0" : "translate-x-full "
       } ${radiusClass}`}
     >
       {/* Wrapper */}
-      <div className=" w-full h-full flex justify-center items-end">
+      <div className=" w-full h-full flex justify-center items-end ">
         <div
           onClick={blockHandler}
-          className="mb-20 w-[150px] h-[40px] bg-white flex justify-center items-center rounded-3xl relative"
+          className="mb-20 w-[150px] h-[40px] bg-white flex justify-center items-center rounded-3xl relative  border border-color_accent_text cursor-pointer"
         >
           <span
-            className={` fixed text-theme_e font-semibold transition-opacity duration-500 ${
+            className={` fixed text-color_main_text font-semibold transition-opacity duration-500 ${
               block ? "opacity-100" : "opacity-0"
             }`}
           >
-            Login
+            로그인
           </span>
           <span
-            className={` fixed text-theme_e font-semibold transition-opacity duration-500 ${
+            className={` fixed text-color_main_text font-semibold transition-opacity duration-500 ${
               block ? "opacity-0" : "opacity-100"
             }`}
           >
-            Sign-up
+            회원가입
           </span>
         </div>
       </div>
