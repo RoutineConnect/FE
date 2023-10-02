@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predeploy": "npm run build",
+    "deploy": "echo. > out\\.nojekyll && gh-pages -d out --dotfiles"
   },
   "dependencies": {
     "@types/node": "20.4.6",
@@ -22,5 +24,8 @@
     "tailwind-scrollbar": "^3.0.5",
     "tailwindcss": "3.3.3",
     "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.0.0"
   }
 }
