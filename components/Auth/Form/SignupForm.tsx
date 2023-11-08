@@ -1,7 +1,6 @@
 "use client";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import ErrorForm from "./ErrorForm";
 
 interface ISignupForm {
   Email: string;
@@ -25,14 +24,9 @@ export default function SignupForm() {
   const watchPassword = watch("password", "");
   return (
     <div className=" flex flex-col items-center w-LoginForm h-LoginForm">
-      <div className=" mt-[86px] font-bold text-3xl text-color_main_text">
-        Sign-up
-      </div>
+      <div className=" mt-[86px] font-bold text-3xl text-color_main_text">Sign-up</div>
       <span className=" mt-5 text-gray-300">Create your Account</span>
-      <form
-        onSubmit={handleSubmit(onSubmitValid)}
-        className=" flex flex-col mt-5"
-      >
+      <form onSubmit={handleSubmit(onSubmitValid)} className=" flex flex-col mt-5">
         <input
           {...register("Email", {
             required: "이메일을 입력해주세요",
@@ -64,8 +58,7 @@ export default function SignupForm() {
         <input
           {...register("passwordCheck", {
             required: "비밀번호를 확인 해주세요",
-            validate: (value) =>
-              value === watchPassword || "비밀번호가 일치하지 않습니다",
+            validate: (value) => value === watchPassword || "비밀번호가 일치하지 않습니다",
           })}
           type="password"
           placeholder="비밀번호 확인"
@@ -73,30 +66,23 @@ export default function SignupForm() {
         />
         {/* 에러 Form */}
         <div className={` mt-3 flex flex-col items-center `}>
-          <ErrorForm message={errors.Email?.message} />
+          {/* <ErrorForm message={errors.Email?.message} />
           <ErrorForm message={errors.username?.message} />
           <ErrorForm message={errors.password?.message} />
-          <ErrorForm message={errors.passwordCheck?.message} />
+          <ErrorForm message={errors.passwordCheck?.message} /> */}
         </div>
-        <button
-          type="submit"
-          className=" w-LoginInput h-LoginInput p-1 mt-2 rounded-md text-white bg-color_main_text"
-        >
+        <button type="submit" className=" w-LoginInput h-LoginInput p-1 mt-2 rounded-md text-white bg-color_main_text">
           회원가입
         </button>
       </form>
       <div className=" text-xs">
         <div className=" flex justify-center items-center  mt-7">
           <span className=" text-gray-300">아이디를 잃어버렸나요?</span>
-          <div className="ml-3 text-gray-400 hover:text-color_accent_text">
-            아이디 찾기
-          </div>
+          <div className="ml-3 text-gray-400 hover:text-color_accent_text">아이디 찾기</div>
         </div>
         <div className=" flex justify-center items-center  mt-1 ">
           <span className=" text-gray-300">비밀번호를 잃어버렸나요?</span>
-          <div className=" ml-3 text-gray-400 hover:text-color_accent_text">
-            비밀번호 찾기
-          </div>
+          <div className=" ml-3 text-gray-400 hover:text-color_accent_text">비밀번호 찾기</div>
         </div>
       </div>
     </div>

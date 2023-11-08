@@ -1,16 +1,17 @@
 "use client";
 
-import IChevron from "@/Icon/IChevron";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import SlideBtn from "@/components/shared/slideBtn";
 
-export default function BackBtn() {
-  const route = useRouter();
-  const BackBtnHandler = () => {
-    route.back();
+export default function PrivateSet() {
+  const [privateSet, setPrivateSet] = useState(false);
+  const PrivateHandler = () => {
+    setPrivateSet(!privateSet);
   };
+
   return (
-    <div className=" w-6 h-6 font-semibold" onClick={BackBtnHandler}>
-      <IChevron />
+    <div>
+      <SlideBtn value={privateSet} onClick={PrivateHandler} />
     </div>
   );
 }

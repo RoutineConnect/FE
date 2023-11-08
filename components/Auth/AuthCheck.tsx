@@ -23,10 +23,7 @@ export default function AuthChek() {
     else {
       //  "account/login"링크로 접속시 "/main"으로 이동시킴
       //  "/"링크로 접속시 "/main"으로 이동시킴
-      if (
-        pathname.toString() === "/" ||
-        pathname.toString() === "/accounts/login"
-      ) {
+      if (pathname.toString() === "/" || pathname.toString() === "/accounts/login") {
         console.log("로그인 됨");
         router.push("/main");
       }

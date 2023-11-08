@@ -1,6 +1,6 @@
-import AddBtn from "@/components/MainPage/AddBtn";
-import MainDate from "@/components/MainPage/MainDate";
-import MainRoutineItem from "@/components/MainPage/MainRoutineItem";
+import AddBtn from "@/components/mainPage/addBtn";
+import MainDate from "@/components/mainPage/mainDate";
+import MainRoutineItem from "@/components/mainPage/mainRoutineItem";
 
 export default function MainPage() {
   return (

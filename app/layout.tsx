@@ -1,9 +1,9 @@
-import AuthChek from "@/components/Auth/AuthCheck";
+import AuthChek from "@/components/auth/authCheck";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
-import RecoilSet from "@/components/Layout/RecoilSet";
+import RecoilSet from "@/components/layout/recoilSet";
 import Head from "next/head";
 
 export const metadata: Metadata = {
@@ -11,11 +11,7 @@ export const metadata: Metadata = {
   description: "Create your perfect day with RotineConnect",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <Head>

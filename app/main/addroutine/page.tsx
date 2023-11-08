@@ -1,5 +1,5 @@
-import PrivateSet from "@/components/MainPage/AddRoutine/PrivateSet";
-import SaveBtn from "@/components/MainPage/AddRoutine/SaveBtn";
+import SaveBtn from "@/components/mainPage/addRoutine/saveBtn";
+import PrivateSet from "@/components/shared/backBtn";
 
 export default function addroutine() {
   return (

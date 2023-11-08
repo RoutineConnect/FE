@@ -1,6 +1,6 @@
 "use client";
 
-import SlideBtn from "@/components/Shared/SlideBtn";
+import SlideBtn from "@/components/shared/slideBtn";
 import { useState } from "react";
 
 export default function PrivateSet() {

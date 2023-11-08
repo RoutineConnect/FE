@@ -6,7 +6,6 @@ import googleBtn from "../../../image/google-login.png";
 import kakaoBtn from "../../../image/kakao-login.png";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
-import ErrorForm from "./ErrorForm";
 
 interface ILoginForm {
   ID: string;
@@ -31,16 +30,11 @@ export default function LoginForm() {
   return (
     <div className=" flex flex-col items-center w-LoginForm h-LoginForm">
       {/* 타이틀 */}
-      <div className=" mt-[86px] font-bold text-3xl text-color_main_text">
-        Login
-      </div>
+      <div className=" mt-[86px] font-bold text-3xl text-color_main_text">Login</div>
       {/* 서브 타이틀 */}
       <span className=" mt-5 text-color_sub_text">Login to your Account</span>
       {/* 로그인 form */}
-      <form
-        onSubmit={handleSubmit(onSubmitValid)}
-        className=" flex flex-col mt-5 items-center"
-      >
+      <form onSubmit={handleSubmit(onSubmitValid)} className=" flex flex-col mt-5 items-center">
         {/* id */}
         <input
           {...register("ID", {
@@ -65,8 +59,8 @@ export default function LoginForm() {
         />
         {/* 에러 Form */}
         <div className={` mt-3 flex flex-col items-center `}>
-          <ErrorForm message={errors.ID?.message} />
-          <ErrorForm message={errors.password?.message} />
+          {/* <ErrorForm message={errors.ID?.message} />
+          <ErrorForm message={errors.password?.message} /> */}
         </div>
         {/* 로그인 버튼 */}
         <div
@@ -114,15 +108,11 @@ export default function LoginForm() {
       <div className=" text-xs">
         <div className=" flex justify-center items-center  mt-7">
           <span className=" text-gray-300">아이디를 잃어버렸나요?</span>
-          <div className="ml-3 text-gray-400 hover:text-color_main_text">
-            아이디 찾기
-          </div>
+          <div className="ml-3 text-gray-400 hover:text-color_main_text">아이디 찾기</div>
         </div>
         <div className=" flex justify-center items-center  mt-1 ">
           <span className=" text-gray-300">비밀번호를 잃어버렸나요?</span>
-          <div className=" ml-3 text-gray-400 hover:text-color_main_text">
-            비밀번호 찾기
-          </div>
+          <div className=" ml-3 text-gray-400 hover:text-color_main_text">비밀번호 찾기</div>
         </div>
       </div>
     </div>

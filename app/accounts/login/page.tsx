@@ -1,6 +1,6 @@
-import LoginBlock from "@/components/Auth/LoginBlock";
-import LoginForm from "@/components/Auth/Form/LoginForm";
-import SignupForm from "@/components/Auth/Form/SignupForm";
+import LoginForm from "@/components/auth/form/loginForm";
+import SignupForm from "@/components/auth/form/signupForm";
+import LoginBlock from "@/components/auth/loginBlock";
 
 export default function login() {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import { MAINROUTINE } from "@/API/MAINROUTINE";
-import ICheck from "@/Icon/ICheck";
+import ICheck from "@/icon/iCheck";
 import { useEffect, useRef, useState } from "react";
 
 interface Routine {
@@ -58,11 +58,7 @@ export default function MainRoutineItem() {
           // Wrapper
           <div className=" flex justify-start w-full h-[75px] items-center rounded-lg overflow-hidden shadow">
             {/* 챌린지 루틴 구분 색상 */}
-            <div
-              className={`w-5 h-full ${
-                routine.type === 1 ? "bg-color_main_text" : "bg-[#F9D060]"
-              }`}
-            ></div>
+            <div className={`w-5 h-full ${routine.type === 1 ? "bg-color_main_text" : "bg-[#F9D060]"}`}></div>
             {/* 시간 */}
             <div
               className={`flex items-center justify-center text-normal font-semibold w-2/12  min-w-[100px] h-full bg-white
@@ -77,24 +73,14 @@ export default function MainRoutineItem() {
                 onContextMenu={(event) => handleContextMenu(event, routine)}
               >
                 {/* 내용 */}
-                <span className=" font-semibold text-color_main_text pt-4">
-                  {routine.description}
-                </span>
+                <span className=" font-semibold text-color_main_text pt-4">{routine.description}</span>
                 {/* 회고 */}
                 <span className=" text-color_sub_text text-sm">
-                  {routine.retrospect
-                    ? routine.retrospect
-                    : "회고를 입력해주세요"}
+                  {routine.retrospect ? routine.retrospect : "회고를 입력해주세요"}
                 </span>
               </div>
               {/* 체크 */}
-              <div
-                className={` w-8 pr-10 ${
-                  routine.check.achievement === true
-                    ? " text-green-500"
-                    : "text-gray-300"
-                }`}
-              >
+              <div className={` w-8 pr-10 ${routine.check.achievement === true ? " text-green-500" : "text-gray-300"}`}>
                 <ICheck />
               </div>
             </div>

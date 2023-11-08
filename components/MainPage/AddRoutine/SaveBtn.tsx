@@ -17,9 +17,7 @@ export default function SaveBtn() {
         className=" w-3/5 bg-white h-10 flex justify-center items-center rounded-lg cursor-pointer"
         onClick={cancleHandler}
       >
-        <span className=" text-[15px] text-color_main_text font-semibold">
-          취소
-        </span>
+        <span className=" text-[15px] text-color_main_text font-semibold">취소</span>
       </div>
       {/* 추가 */}
       <div

@@ -1,7 +1,7 @@
 "use client";
 
-import IEdit from "@/Icon/IEdit";
-import IPlus from "@/Icon/IPlus";
+import IEdit from "@/icon/iEdit";
+import IPlus from "@/icon/iPlus";
 import { useRouter } from "next/navigation";
 
 export default function AddBtn() {

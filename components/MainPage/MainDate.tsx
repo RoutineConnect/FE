@@ -59,17 +59,10 @@ export default function MainDate() {
                 d.date === now ? " bg-color_bg" : null
               } `}
             >
-              <span className=" text-base font-semibol opacity-60">
-                {d.dayOfWeek}
-              </span>
+              <span className=" text-base font-semibol opacity-60">{d.dayOfWeek}</span>
               <span className=" text-lg font-semibold">{d.date}</span>
             </div>
-            <div
-              className={` w-[7px] h-[7px] rounded-full mt-2 bg-${achievements(
-                d.achive,
-                d.date
-              )}`}
-            ></div>
+            <div className={` w-[7px] h-[7px] rounded-full mt-2 bg-${achievements(d.achive, d.date)}`}></div>
           </div>
         );
       })}

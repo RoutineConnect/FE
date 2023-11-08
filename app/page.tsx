@@ -1,4 +1,4 @@
-import ILogo from "@/Icon/ILogo";
+import ILogo from "@/icon/iLogo";
 
 export default function Home() {
   return (
