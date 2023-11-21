@@ -15,16 +15,12 @@ interface ApiResponse {
 
 const SignupAPI = async (formData: SignupData): Promise<AxiosResponse<ApiResponse>> => {
   try {
-    const response = await api.post<SignupData, AxiosResponse<ApiResponse>>(
-      "https://port-0-routine-connect-be-4fju66f2clmx3fx61.sel5.cloudtype.app/sign-api/sign-up",
-      formData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      }
-    );
+    const response = await api.post<SignupData, AxiosResponse<ApiResponse>>("/sign-api/sign-up", formData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    });
     return response;
   } catch (error) {
     console.log(formData);
