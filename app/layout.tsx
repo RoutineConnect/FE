@@ -1,7 +1,6 @@
 import AuthChek from "@/components/auth/authCheck";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 
 import RecoilSet from "@/components/layout/recoilSet";
 import Head from "next/head";

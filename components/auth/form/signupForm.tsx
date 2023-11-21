@@ -1,10 +1,12 @@
 "use client";
 
 import { SubmitHandler, useForm } from "react-hook-form";
+import ErrorForm from "./errorForm";
+import SignupAPI from "@/API/auth/signupApi";
 
 interface ISignupForm {
-  Email: string;
-  username: string;
+  email: string;
+  name: string;
   password: string;
   passwordCheck: string;
 }
@@ -15,11 +17,28 @@ export default function SignupForm() {
     formState: { errors },
     handleSubmit,
     watch,
+    setError,
   } = useForm<ISignupForm>({
     mode: "onChange",
   });
-  const onSubmitValid: SubmitHandler<ISignupForm> = () => {
-    return null;
+
+  const onSubmitValid: SubmitHandler<ISignupForm> = async (data) => {
+    try {
+      const response = await SignupAPI({
+        email: data.email,
+        name: data.name,
+        password: data.password,
+      });
+      console.log("Response:", response.data);
+      // Handle the response data accordingly
+    } catch (error) {
+      console.error("Error:", error);
+      // if (error) {
+      //   setError("email", {
+      //     message: error.msg,
+      //   });
+      // }
+    }
   };
   const watchPassword = watch("password", "");
   return (
@@ -28,7 +47,7 @@ export default function SignupForm() {
       <span className=" mt-5 text-gray-300">Create your Account</span>
       <form onSubmit={handleSubmit(onSubmitValid)} className=" flex flex-col mt-5">
         <input
-          {...register("Email", {
+          {...register("email", {
             required: "이메일을 입력해주세요",
             pattern: {
               value: /[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/,
@@ -40,7 +59,7 @@ export default function SignupForm() {
           className=" focus:outline-0 focus:border-color_accent_text w-LoginInput h-LoginInput border border-color_sub_text rounded-md  p-1 pl-4 placeholder:text-sm "
         />
         <input
-          {...register("username", {
+          {...register("name", {
             required: "유저명을 입력해주세요",
           })}
           type="text"
@@ -66,10 +85,10 @@ export default function SignupForm() {
         />
         {/* 에러 Form */}
         <div className={` mt-3 flex flex-col items-center `}>
-          {/* <ErrorForm message={errors.Email?.message} />
-          <ErrorForm message={errors.username?.message} />
+          <ErrorForm message={errors.email?.message} />
+          <ErrorForm message={errors.name?.message} />
           <ErrorForm message={errors.password?.message} />
-          <ErrorForm message={errors.passwordCheck?.message} /> */}
+          <ErrorForm message={errors.passwordCheck?.message} />
         </div>
         <button type="submit" className=" w-LoginInput h-LoginInput p-1 mt-2 rounded-md text-white bg-color_main_text">
           회원가입

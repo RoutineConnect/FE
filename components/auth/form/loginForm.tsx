@@ -6,9 +6,10 @@ import googleBtn from "../../../image/google-login.png";
 import kakaoBtn from "../../../image/kakao-login.png";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
+import LoginAPI from "@/API/auth/loginApi";
 
 interface ILoginForm {
-  ID: string;
+  email: string;
   password: string;
 }
 
@@ -24,8 +25,23 @@ export default function LoginForm() {
   const LoginHandler = () => {
     setIsLoggedIn(true);
   };
-  const onSubmitValid: SubmitHandler<ILoginForm> = () => {
-    return null;
+  const onSubmitValid: SubmitHandler<ILoginForm> = async (data) => {
+    try {
+      console.log("onCLisk");
+      const response = await LoginAPI({
+        email: data.email,
+        password: data.password,
+      });
+      console.log("Response:", response.data);
+      // Handle the response data accordingly
+    } catch (error) {
+      console.error("Error:", error);
+      // if (error) {
+      //   setError("email", {
+      //     message: error.msg,
+      //   });
+      // }
+    }
   };
   return (
     <div className=" flex flex-col items-center w-LoginForm h-LoginForm">
@@ -37,7 +53,7 @@ export default function LoginForm() {
       <form onSubmit={handleSubmit(onSubmitValid)} className=" flex flex-col mt-5 items-center">
         {/* id */}
         <input
-          {...register("ID", {
+          {...register("email", {
             required: "아이디를 입력해주세요",
             pattern: {
               value: /[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/,
@@ -63,14 +79,14 @@ export default function LoginForm() {
           <ErrorForm message={errors.password?.message} /> */}
         </div>
         {/* 로그인 버튼 */}
-        <div
-          //   type="submit"
+        <button
+          type="submit"
           className=" w-LoginInput h-LoginInput p-1 mt-2 rounded-md text-white bg-color_main_text
            flex justify-center items-center"
-          onClick={LoginHandler}
+          // onClick={LoginHandler}
         >
           로그인
-        </div>
+        </button>
       </form>
       <div className=" flex justify-between items-center w-LoginInput mt-3 ">
         <div className=" w-[100px] h-[0.2px] bg-gray-300"></div>
@@ -85,7 +101,7 @@ export default function LoginForm() {
           <div className=" flex justify-center items-center">
             {/* 이미지 */}
             <div className=" w-[30px] h-[30px]  relative mx-3">
-              <Image src={googleBtn} alt="google" layout="fill" />
+              <Image src={googleBtn} alt="google" fill={true} />
             </div>
             {/* text */}
             <span className=" text-[#000000] opacity-85">구글 로그인</span>
@@ -97,7 +113,7 @@ export default function LoginForm() {
           <div className=" flex justify-center items-center">
             {/* 이미지 */}
             <div className=" w-[36px] h-[36px]  relative mx-2">
-              <Image src={kakaoBtn} alt="google" layout="fill" />
+              <Image src={kakaoBtn} alt="google" fill={true} />
             </div>
             {/* text */}
             <span className=" text-black opacity-85">카카오 로그인</span>
