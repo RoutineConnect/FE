@@ -1,10 +1,10 @@
-import ILogo from "@/Icon/ILogo";
 import teemo from "../../image/Teemo.png";
 import Image from "next/image";
 import IFace from "@/icon/iFace";
 import IShared from "@/icon/iShared";
 import IFeed from "@/icon/iFeed";
 import ITropy from "@/icon/iTropy";
+import ILogo from "@/icon/iLogo";
 
 export default function Sidebar_L() {
   return (
