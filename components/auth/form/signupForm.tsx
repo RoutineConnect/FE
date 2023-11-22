@@ -31,8 +31,8 @@ export default function SignupForm() {
         name,
         password,
       });
-      sessionStorage.setItem("USER_EMAIL", email);
-      sessionStorage.setItem("USER_PASSWORD", password);
+      // sessionStorage.setItem("USER_EMAIL", email);
+      // sessionStorage.setItem("USER_PASSWORD", password);
       console.log("Response:", response.data);
       window.location.reload();
     } catch (error) {

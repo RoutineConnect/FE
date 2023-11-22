@@ -15,26 +15,26 @@ interface ILoginForm {
 }
 
 export default function LoginForm() {
-  const signupUserEmail = sessionStorage.getItem("USER_EMAIL");
-  const signupUserPassword = sessionStorage.getItem("USER_PASSWORD");
+  // const signupUserEmail = sessionStorage.getItem("USER_EMAIL");
+  // const signupUserPassword = sessionStorage.getItem("USER_PASSWORD");
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm<ILoginForm>({
     mode: "onChange",
-    defaultValues: {
-      email: signupUserEmail || "",
-      password: signupUserPassword || "",
-    },
+    // defaultValues: {
+    //   email: signupUserEmail || "",
+    //   password: signupUserPassword || "",
+    // },
   });
 
   const loginValue = useSetRecoilState(LoginValue);
   const LoggedIn = (token: string) => {
     localStorage.setItem("TOKEN", token);
     loginValue(true);
-    sessionStorage.removeItem("USER_EMAIL");
-    sessionStorage.removeItem("USER_PASSWORD");
+    // sessionStorage.removeItem("USER_EMAIL");
+    // sessionStorage.removeItem("USER_PASSWORD");
     console.log("로그인 성공");
   };
 
