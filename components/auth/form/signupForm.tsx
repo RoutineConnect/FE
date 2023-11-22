@@ -3,6 +3,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import ErrorForm from "./errorForm";
 import SignupAPI from "@/API/auth/signupApi";
+import { AxiosError } from "axios";
 
 interface ISignupForm {
   email: string;
@@ -18,26 +19,22 @@ export default function SignupForm() {
     handleSubmit,
     watch,
     setError,
+    getValues,
   } = useForm<ISignupForm>({
     mode: "onChange",
   });
 
-  const onSubmitValid: SubmitHandler<ISignupForm> = async (data) => {
+  const onSubmitValid: SubmitHandler<ISignupForm> = async () => {
     try {
+      const { email, name, password } = getValues();
       const response = await SignupAPI({
-        email: data.email,
-        name: data.name,
-        password: data.password,
+        email,
+        name,
+        password,
       });
       console.log("Response:", response.data);
-      // Handle the response data accordingly
     } catch (error) {
-      console.error("Error:", error);
-      // if (error) {
-      //   setError("email", {
-      //     message: error.msg,
-      //   });
-      // }
+      console.log(error);
     }
   };
   const watchPassword = watch("password", "");

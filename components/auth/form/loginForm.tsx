@@ -7,6 +7,7 @@ import kakaoBtn from "../../../image/kakao-login.png";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
 import LoginAPI from "@/API/auth/loginApi";
+import ErrorForm from "./errorForm";
 
 interface ILoginForm {
   email: string;
@@ -33,7 +34,7 @@ export default function LoginForm() {
         password: data.password,
       });
       console.log("Response:", response.data);
-      // Handle the response data accordingly
+      setIsLoggedIn(true);
     } catch (error) {
       console.error("Error:", error);
       // if (error) {
@@ -75,15 +76,14 @@ export default function LoginForm() {
         />
         {/* 에러 Form */}
         <div className={` mt-3 flex flex-col items-center `}>
-          {/* <ErrorForm message={errors.ID?.message} />
-          <ErrorForm message={errors.password?.message} /> */}
+          <ErrorForm message={errors.email?.message} />
+          <ErrorForm message={errors.password?.message} />
         </div>
         {/* 로그인 버튼 */}
         <button
           type="submit"
           className=" w-LoginInput h-LoginInput p-1 mt-2 rounded-md text-white bg-color_main_text
            flex justify-center items-center"
-          // onClick={LoginHandler}
         >
           로그인
         </button>

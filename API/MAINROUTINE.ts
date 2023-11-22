@@ -182,3 +182,35 @@ export const MAINROUTINE = [
     },
   },
 ];
+
+interface RoutineOnDate {
+  id: number;
+  position: number;
+  items: routine | challenge;
+  accomplishment: string;
+}
+
+interface routine {
+  id: number;
+  title: string;
+  retrospect: string;
+  repeatingDays: [string];
+  hour: {
+    id: number;
+  };
+  shared: boolean;
+  createDate: any;
+  endedDate: any;
+}
+interface challenge {
+  id: number;
+  title: string;
+  retrospect: string;
+  repeatingDays: [string];
+  hour: {
+    id: number;
+  };
+  shared: boolean;
+  createDate: any;
+  endedDate: any;
+}

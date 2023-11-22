@@ -1,5 +1,5 @@
-import { AxiosResponse } from "axios";
-import api from "../axiosConfig";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import AxiosApi from "../axiosConfig";
 
 interface SignupData {
   email: string;
@@ -15,16 +15,10 @@ interface ApiResponse {
 
 const SignupAPI = async (formData: SignupData): Promise<AxiosResponse<ApiResponse>> => {
   try {
-    const response = await api.post<SignupData, AxiosResponse<ApiResponse>>("/sign-api/sign-up", formData, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    });
+    const response = await AxiosApi.post<SignupData, AxiosResponse<ApiResponse>>("/sign-api/sign-up", formData);
     return response;
-  } catch (error) {
-    console.log(formData);
-    throw error;
+  } catch (error: any) {
+    throw new AxiosError("An error occurred", error.config, error.code, error.request, error.response);
   }
 };
 

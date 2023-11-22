@@ -54,6 +54,15 @@ export default function addroutine() {
       </div>
       {/* saperator */}
       <div className=" h-[1px] w-full bg-color_sub_text mt-5 mb-5"></div>
+      {/* 종료일 */}
+      <div className=" flex justify-between w-full">
+        {/* title */}
+        <span className=" font-semibold">종료일</span>
+        {/* 캘린더 선택 */}
+        <div className=" text-color_accent_text">2023.08.31</div>
+      </div>
+      {/* saperator */}
+      <div className=" h-[1px] w-full bg-color_sub_text mt-5 mb-5"></div>
       {/* 반복주기 */}
       <div className=" flex flex-col w-full">
         {/* titltle */}

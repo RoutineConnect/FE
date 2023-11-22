@@ -1,19 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
-const config = {
-  backend: {
-    baseURL: process.env.SERVER_BASE_URL,
-  },
-};
-
-const server = config.backend.baseURL;
-
-const api: AxiosInstance = axios.create({
-  baseURL: server,
-  withCredentials: true,
-  headers: {
-    "Content-Type": "application/json",
-  },
+const AxiosApi: AxiosInstance = axios.create({
+  baseURL: "https://port-0-routine-connect-be-4fju66f2clmx3fx61.sel5.cloudtype.app",
 });
 
-export default api;
+export default AxiosApi;

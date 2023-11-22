@@ -6,8 +6,8 @@ export default function ILogo() {
         data-name="ROUTINE CONNECT"
         transform="translate(0 18)"
         fill="#294694"
-        font-size="20"
-        font-family="Bauhaus93, 'Bauhaus \39 3'"
+        fontSize="20"
+        fontFamily="Bauhaus93, 'Bauhaus \39 3'"
       >
         <tspan x="0" y="0">
           ROUTINE CONNECT
