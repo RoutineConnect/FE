@@ -3,7 +3,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import ErrorForm from "./errorForm";
 import SignupAPI from "@/API/auth/signupApi";
-import { AxiosError } from "axios";
 
 interface ISignupForm {
   email: string;
@@ -32,9 +31,12 @@ export default function SignupForm() {
         name,
         password,
       });
+      sessionStorage.setItem("USER_EMAIL", email);
+      sessionStorage.setItem("USER_PASSWORD", password);
       console.log("Response:", response.data);
+      window.location.reload();
     } catch (error) {
-      console.log(error);
+      console.log("Error:", error);
     }
   };
   const watchPassword = watch("password", "");

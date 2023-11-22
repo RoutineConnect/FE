@@ -18,15 +18,15 @@ export default function AuthChek() {
     if (!isLoggedIn) {
       //  로그인창으로 이동시킴
       router.push("/accounts/login");
+      return;
     }
     // 로그인이 되어있는 경우
-    else {
-      //  "account/login"링크로 접속시 "/main"으로 이동시킴
-      //  "/"링크로 접속시 "/main"으로 이동시킴
-      if (pathname.toString() === "/" || pathname.toString() === "/accounts/login") {
-        console.log("로그인 됨");
-        router.push("/main");
-      }
+    //  "account/login"링크로 접속시 "/main"으로 이동시킴
+    //  "/"링크로 접속시 "/main"으로 이동시킴
+    if (pathname.toString() === "/" || pathname.toString() === "/accounts/login") {
+      console.log("로그인 됨");
+      router.push("/main");
+      return;
     }
   }, [isLoggedIn, router]);
   return null;

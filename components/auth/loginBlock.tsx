@@ -1,9 +1,11 @@
 "use client";
 
+import { AuthBlockValue } from "@/atom";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 
 export default function LoginBlock() {
-  const [block, setBlock] = useState(false);
+  const [block, setBlock] = useRecoilState(AuthBlockValue);
   const [radiusClass, setRadiusClass] = useState("rounded-s-2xl");
   const blockHandler = () => {
     setBlock(!block);

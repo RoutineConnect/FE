@@ -1,7 +1,7 @@
 "use client";
 
 import { LoginValue } from "@/atom";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import googleBtn from "../../../image/google-login.png";
 import kakaoBtn from "../../../image/kakao-login.png";
 import Image from "next/image";
@@ -15,17 +15,29 @@ interface ILoginForm {
 }
 
 export default function LoginForm() {
+  const signupUserEmail = sessionStorage.getItem("USER_EMAIL");
+  const signupUserPassword = sessionStorage.getItem("USER_PASSWORD");
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm<ILoginForm>({
     mode: "onChange",
+    defaultValues: {
+      email: signupUserEmail || "",
+      password: signupUserPassword || "",
+    },
   });
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginValue);
-  const LoginHandler = () => {
-    setIsLoggedIn(true);
+
+  const loginValue = useSetRecoilState(LoginValue);
+  const LoggedIn = (token: string) => {
+    localStorage.setItem("TOKEN", token);
+    loginValue(true);
+    sessionStorage.removeItem("USER_EMAIL");
+    sessionStorage.removeItem("USER_PASSWORD");
+    console.log("로그인 성공");
   };
+
   const onSubmitValid: SubmitHandler<ILoginForm> = async (data) => {
     try {
       console.log("onCLisk");
@@ -33,8 +45,7 @@ export default function LoginForm() {
         email: data.email,
         password: data.password,
       });
-      console.log("Response:", response.data);
-      setIsLoggedIn(true);
+      LoggedIn(response.data.token);
     } catch (error) {
       console.error("Error:", error);
       // if (error) {
