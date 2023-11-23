@@ -1,21 +1,23 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { LoginValue } from "@/atom";
+import { useEffect } from "react";
 
 // 전체적으로 로그인 상태 확인해주는 함수
 export default function AuthChek() {
   // 현재 url정보 가져오기
   const pathname = usePathname();
   const router = useRouter();
-  //  로그인정보 가져오기 ( 일시적으로 값 지정 )
-  const isLoggedIn = useRecoilValue(LoginValue);
+
+  const [loginState, setLoginState] = useRecoilState(LoginValue);
 
   useEffect(() => {
+    const loginToken = localStorage.getItem("TOKEN");
+    console.log(loginState);
     //  로그인이 안되어있는 경우
-    if (!isLoggedIn) {
+    if (!loginToken) {
       //  로그인창으로 이동시킴
       router.push("/accounts/login");
       return;
@@ -23,12 +25,16 @@ export default function AuthChek() {
     // 로그인이 되어있는 경우
     //  "account/login"링크로 접속시 "/main"으로 이동시킴
     //  "/"링크로 접속시 "/main"으로 이동시킴
-    if (pathname.toString() === "/" || pathname.toString() === "/accounts/login") {
+    setLoginState(true);
+    if (
+      pathname.toString() === "/" ||
+      pathname.toString() === "/accounts/login"
+    ) {
       console.log("로그인 됨");
       router.push("/main");
       return;
     }
-  }, [isLoggedIn, router]);
+  }, [loginState, router]);
   return null;
 }
 
