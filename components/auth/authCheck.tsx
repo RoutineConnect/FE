@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { LoginValue } from "@/atom";
 import { useEffect } from "react";
+import { getCookie } from "../utils/setCookie";
 
 // 전체적으로 로그인 상태 확인해주는 함수
 export default function AuthChek() {
@@ -14,8 +15,7 @@ export default function AuthChek() {
   const [loginState, setLoginState] = useRecoilState(LoginValue);
 
   useEffect(() => {
-    const loginToken = localStorage.getItem("TOKEN");
-    console.log(loginState);
+    const loginToken = getCookie();
     //  로그인이 안되어있는 경우
     if (!loginToken) {
       //  로그인창으로 이동시킴

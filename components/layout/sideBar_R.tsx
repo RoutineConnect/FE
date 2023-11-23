@@ -2,11 +2,12 @@
 
 import { LoginValue } from "@/atom";
 import { useSetRecoilState } from "recoil";
+import { deleteCookie } from "../utils/setCookie";
 
 export default function SideBar_R() {
   const setLoginVar = useSetRecoilState(LoginValue);
   const logOut = () => {
-    localStorage.removeItem("TOKEN");
+    deleteCookie();
     setLoginVar(false);
   };
   return (
