@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.8.7",
     "@types/node": "20.4.6",
     "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
@@ -20,6 +21,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.45.4",
+    "react-query": "^3.39.3",
     "recoil": "^0.7.7",
     "supports-color": "^9.4.0",
     "tailwind-scrollbar": "^3.0.5",

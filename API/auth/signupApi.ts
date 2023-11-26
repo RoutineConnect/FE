@@ -1,5 +1,5 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
-import AxiosApi from "../axiosConfig";
+import { AxiosError, AxiosResponse } from "axios";
+import { publicApi } from "../axiosConfig";
 
 interface SignupData {
   email: string;
@@ -13,12 +13,23 @@ interface ApiResponse {
   success: boolean;
 }
 
-const SignupAPI = async (formData: SignupData): Promise<AxiosResponse<ApiResponse>> => {
+const SignupAPI = async (
+  formData: SignupData
+): Promise<AxiosResponse<ApiResponse>> => {
   try {
-    const response = await AxiosApi.post<SignupData, AxiosResponse<ApiResponse>>("/sign-api/sign-up", formData);
+    const response = await publicApi.post<
+      SignupData,
+      AxiosResponse<ApiResponse>
+    >("/sign-api/sign-up", formData);
     return response;
   } catch (error: any) {
-    throw new AxiosError("An error occurred", error.config, error.code, error.request, error.response);
+    throw new AxiosError(
+      "An error occurred",
+      error.config,
+      error.code,
+      error.request,
+      error.response
+    );
   }
 };
 

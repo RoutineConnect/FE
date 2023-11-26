@@ -1,6 +1,5 @@
 import { AxiosResponse } from "axios";
-import axiosInstace from "../axiosConfig";
-import api from "../axiosConfig";
+import { publicApi } from "../axiosConfig";
 
 interface LoginFormData {
   email: string;
@@ -14,22 +13,22 @@ interface ApiResponse {
   token: string;
 }
 
-const LoginAPI = async (formData: LoginFormData): Promise<AxiosResponse<ApiResponse>> => {
+const LoginAPI = async (
+  formData: LoginFormData
+): Promise<AxiosResponse<ApiResponse>> => {
   try {
     console.log(formData);
-    const response = await api.post<LoginFormData, AxiosResponse<ApiResponse>>(
-      `${axiosInstace.defaults.baseURL}/sign-api/sign-in`,
-      null,
-      {
-        params: formData,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await publicApi.post<
+      LoginFormData,
+      AxiosResponse<ApiResponse>
+    >(`/sign-api/sign-in`, null, {
+      params: formData,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     return response;
   } catch (error) {
-    console.log(formData);
     throw error;
   }
 };

@@ -1,30 +1,25 @@
 "use client";
 
-import { MAINROUTINE } from "@/API/MAINROUTINE";
-import ICheck from "@/icon/iCheck";
-import { useEffect, useRef, useState } from "react";
-
-interface Routine {
-  id: number;
-  type: number;
-  hours: string;
-  description: string;
-  retrospect: string | null;
-  check: {
-    achievement: boolean;
-  };
-}
+import React, { useEffect, useRef, useState } from "react";
+import GetDateRoutine from "../hook/getDateRoutine";
+import { DateRoutineResponse } from "@/API/routine/getDateRoutineApi";
+import AccomplishmentBtn from "./function/accomplishmentBtn";
+import { useQuery } from "@tanstack/react-query";
 
 export default function MainRoutineItem() {
+  // contextMenu
   const [contextMenu, setContextMenu] = useState<{
     x: number;
     y: number;
-    routine?: Routine;
+    routine?: DateRoutineResponse;
   } | null>(null);
 
   const menuRef = useRef<HTMLDivElement | null>(null);
 
-  const handleContextMenu = (event: React.MouseEvent, routine: Routine) => {
+  const handleContextMenu = (
+    event: React.MouseEvent,
+    routine: DateRoutineResponse
+  ) => {
     event.preventDefault();
 
     const x = event.clientX;
@@ -51,40 +46,79 @@ export default function MainRoutineItem() {
     };
   }, []);
 
+  // 선택 날짜 루틴 배열
+
+  const date = "2023-11-27";
+
+  const { isLoading, data } = useQuery({
+    queryKey: ["routines", date],
+    queryFn: () => GetDateRoutine(date),
+    refetchOnWindowFocus: false,
+  });
+
+  const [routineArray, setRoutineArray] = useState<DateRoutineResponse[]>([]);
+
+  const sortArrayByPosition = (routines: DateRoutineResponse[]) => {
+    return routines.sort((a, b) => a.position - b.position);
+  };
+  useEffect(() => {
+    const fetchData = async () => {
+      if (data) {
+        const sortArray = sortArrayByPosition(data);
+        setRoutineArray(sortArray);
+      }
+    };
+    fetchData();
+    console.log("fetching");
+  }, [isLoading, data]);
+
   return (
     <div className=" space-y-[20px] w-full ">
-      {MAINROUTINE.map((routine) => {
+      {routineArray.map((routine, index) => {
         return (
-          // Wrapper
-          <div className=" flex justify-start w-full h-[75px] items-center rounded-lg overflow-hidden shadow">
-            {/* 챌린지 루틴 구분 색상 */}
-            <div className={`w-5 h-full ${routine.type === 1 ? "bg-color_main_text" : "bg-[#F9D060]"}`}></div>
-            {/* 시간 */}
-            <div
-              className={`flex items-center justify-center text-normal font-semibold w-2/12  min-w-[100px] h-full bg-white
-               `}
-            >
-              {routine.hours}
-            </div>
-            <div className=" flex w-full h-full justify-between items-center bg-white">
-              {/* 콘텐츠 wrapper */}
+          <React.Fragment key={index}>
+            {/* Wrapper */}
+            <div className=" flex justify-start w-full h-[75px] items-center rounded-lg overflow-hidden shadow">
+              {/* 챌린지 루틴 구분 색상 */}
               <div
-                className=" flex flex-col w-full h-full  border-l pl-20"
-                onContextMenu={(event) => handleContextMenu(event, routine)}
+                className={`w-5 h-full ${
+                  routine.item.type === "routine"
+                    ? "bg-color_main_text"
+                    : "bg-[#F9D060]"
+                }`}
+              ></div>
+              {/* 시간 */}
+              <div
+                className={`flex items-center justify-center text-normal font-semibold w-2/12  min-w-[100px] h-full bg-white
+               `}
               >
-                {/* 내용 */}
-                <span className=" font-semibold text-color_main_text pt-4">{routine.description}</span>
-                {/* 회고 */}
-                <span className=" text-color_sub_text text-sm">
-                  {routine.retrospect ? routine.retrospect : "회고를 입력해주세요"}
-                </span>
+                {routine.item.hour.hour}
               </div>
-              {/* 체크 */}
-              <div className={` w-8 pr-10 ${routine.check.achievement === true ? " text-green-500" : "text-gray-300"}`}>
-                <ICheck />
+              <div className=" flex w-full h-full justify-between items-center bg-white">
+                {/* 콘텐츠 wrapper */}
+                <div
+                  className=" flex flex-col w-full h-full  border-l pl-20"
+                  onContextMenu={(event) => handleContextMenu(event, routine)}
+                >
+                  {/* 내용 */}
+                  <span className=" font-semibold text-color_main_text pt-4">
+                    {routine.item.title}
+                  </span>
+                  {/* 회고 */}
+                  <span className=" text-color_sub_text text-sm">
+                    {routine.item.retrospective
+                      ? routine.item.retrospective
+                      : "회고를 입력해주세요"}
+                  </span>
+                </div>
+                {/* 체크 */}
+                <AccomplishmentBtn
+                  routine_id={routine.item.id}
+                  accomplishment={routine.accomplishment}
+                />
               </div>
             </div>
-          </div>
+          </React.Fragment>
         );
       })}
       {contextMenu && (
