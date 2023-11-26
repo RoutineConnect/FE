@@ -9,6 +9,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import LoginAPI from "@/API/auth/loginApi";
 import ErrorForm from "./errorForm";
 import { setCookie } from "@/components/utils/setCookie";
+import { useRouter } from "next/navigation";
+import { setToken } from "@/API/axiosConfig";
 
 interface ILoginForm {
   email: string;
@@ -18,6 +20,7 @@ interface ILoginForm {
 export default function LoginForm() {
   // const signupUserEmail = sessionStorage.getItem("USER_EMAIL");
   // const signupUserPassword = sessionStorage.getItem("USER_PASSWORD");
+  const router = useRouter();
   const {
     register,
     formState: { errors },
@@ -32,11 +35,11 @@ export default function LoginForm() {
 
   const loginValue = useSetRecoilState(LoginValue);
   const LoggedIn = (token: string) => {
+    setToken(token);
     setCookie(token);
     loginValue(true);
-    // sessionStorage.removeItem("USER_EMAIL");
-    // sessionStorage.removeItem("USER_PASSWORD");
     console.log("로그인 성공");
+    router.push("/main");
   };
 
   const onSubmitValid: SubmitHandler<ILoginForm> = async (data) => {
@@ -59,16 +62,11 @@ export default function LoginForm() {
   return (
     <div className=" flex flex-col items-center w-LoginForm h-LoginForm">
       {/* 타이틀 */}
-      <div className=" mt-[86px] font-bold text-3xl text-color_main_text">
-        Login
-      </div>
+      <div className=" mt-[86px] font-bold text-3xl text-color_main_text">Login</div>
       {/* 서브 타이틀 */}
       <span className=" mt-5 text-color_sub_text">Login to your Account</span>
       {/* 로그인 form */}
-      <form
-        onSubmit={handleSubmit(onSubmitValid)}
-        className=" flex flex-col mt-5 items-center"
-      >
+      <form onSubmit={handleSubmit(onSubmitValid)} className=" flex flex-col mt-5 items-center">
         {/* id */}
         <input
           {...register("email", {
@@ -141,15 +139,11 @@ export default function LoginForm() {
       <div className=" text-xs">
         <div className=" flex justify-center items-center  mt-7">
           <span className=" text-gray-300">아이디를 잃어버렸나요?</span>
-          <div className="ml-3 text-gray-400 hover:text-color_main_text">
-            아이디 찾기
-          </div>
+          <div className="ml-3 text-gray-400 hover:text-color_main_text">아이디 찾기</div>
         </div>
         <div className=" flex justify-center items-center  mt-1 ">
           <span className=" text-gray-300">비밀번호를 잃어버렸나요?</span>
-          <div className=" ml-3 text-gray-400 hover:text-color_main_text">
-            비밀번호 찾기
-          </div>
+          <div className=" ml-3 text-gray-400 hover:text-color_main_text">비밀번호 찾기</div>
         </div>
       </div>
     </div>

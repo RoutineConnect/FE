@@ -7,6 +7,7 @@ import AccomplishmentBtn from "./function/accomplishmentBtn";
 import { useQuery } from "@tanstack/react-query";
 import { useRecoilValue } from "recoil";
 import { pickDateValue } from "@/atom";
+import { getCookie, refreshAndSetToken } from "../utils/setCookie";
 
 export default function MainRoutineItem() {
   // contextMenu
@@ -51,7 +52,7 @@ export default function MainRoutineItem() {
 
   const { isLoading, data, isError } = useQuery({
     queryKey: ["routines", { date: date }],
-    queryFn: () => GetDateRoutine(date),
+    queryFn: async () => await GetDateRoutine(date),
   });
 
   const [routineArray, setRoutineArray] = useState<DateRoutineResponse[]>([]);
@@ -67,7 +68,6 @@ export default function MainRoutineItem() {
       }
     };
     fetchData();
-    console.log("fetching");
   }, [isLoading, data]);
 
   if (isLoading) {

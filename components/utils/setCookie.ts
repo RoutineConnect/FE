@@ -1,3 +1,5 @@
+import { privateApi } from "@/API/axiosConfig";
+
 export const setCookie = (token: string) => {
   if (typeof document !== "undefined") {
     const expirationDate = new Date();
@@ -23,7 +25,16 @@ export const getCookie = () => {
 
 export const deleteCookie = () => {
   if (typeof document !== "undefined") {
-    document.cookie =
-      "TOKEN" + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "TOKEN" + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  }
+};
+
+export const refreshAndSetToken = () => {
+  try {
+    const newToken = getCookie();
+
+    privateApi.defaults.headers["TOKEN"] = `${newToken}`;
+  } catch (error) {
+    console.error("Failed to refresh token:", error);
   }
 };
