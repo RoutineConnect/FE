@@ -2,8 +2,9 @@ import AuthChek from "@/components/auth/authCheck";
 import "./globals.css";
 import type { Metadata } from "next";
 
-import RecoilSet from "@/components/layout/recoilSet";
 import Head from "next/head";
+import RecoilProvider from "@/components/provider/recoilProvider";
+import ReactQueryProvider from "@/components/provider/reactQueryProvider";
 
 export const metadata: Metadata = {
   title: "RotineConnect",
@@ -22,11 +23,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </Head>
       <body className={`font-pretendard`}>
-        <RecoilSet>
-          {/* 전체적으로 로그인 상태를 확인해주는 함수 호출 */}
-          <AuthChek />
-          {children}
-        </RecoilSet>
+        <RecoilProvider>
+          <ReactQueryProvider>
+            {/* 전체적으로 로그인 상태를 확인해주는 함수 호출 */}
+            <AuthChek />
+            {children}
+          </ReactQueryProvider>
+        </RecoilProvider>
       </body>
     </html>
   );

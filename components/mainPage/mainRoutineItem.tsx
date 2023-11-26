@@ -5,6 +5,8 @@ import GetDateRoutine from "../hook/getDateRoutine";
 import { DateRoutineResponse } from "@/API/routine/getDateRoutineApi";
 import AccomplishmentBtn from "./function/accomplishmentBtn";
 import { useQuery } from "@tanstack/react-query";
+import { useRecoilValue } from "recoil";
+import { pickDateValue } from "@/atom";
 
 export default function MainRoutineItem() {
   // contextMenu
@@ -16,10 +18,7 @@ export default function MainRoutineItem() {
 
   const menuRef = useRef<HTMLDivElement | null>(null);
 
-  const handleContextMenu = (
-    event: React.MouseEvent,
-    routine: DateRoutineResponse
-  ) => {
+  const handleContextMenu = (event: React.MouseEvent, routine: DateRoutineResponse) => {
     event.preventDefault();
 
     const x = event.clientX;
@@ -48,12 +47,11 @@ export default function MainRoutineItem() {
 
   // 선택 날짜 루틴 배열
 
-  const date = "2023-11-27";
+  const date = useRecoilValue(pickDateValue);
 
-  const { isLoading, data } = useQuery({
-    queryKey: ["routines", date],
+  const { isLoading, data, isError } = useQuery({
+    queryKey: ["routines", { date: date }],
     queryFn: () => GetDateRoutine(date),
-    refetchOnWindowFocus: false,
   });
 
   const [routineArray, setRoutineArray] = useState<DateRoutineResponse[]>([]);
@@ -72,6 +70,14 @@ export default function MainRoutineItem() {
     console.log("fetching");
   }, [isLoading, data]);
 
+  if (isLoading) {
+    return <div>isLoading...</div>;
+  }
+
+  if (isError) {
+    return <div>어머! 페이지를 찾을수 없어요ㅠㅠ</div>;
+  }
+
   return (
     <div className=" space-y-[20px] w-full ">
       {routineArray.map((routine, index) => {
@@ -81,11 +87,7 @@ export default function MainRoutineItem() {
             <div className=" flex justify-start w-full h-[75px] items-center rounded-lg overflow-hidden shadow">
               {/* 챌린지 루틴 구분 색상 */}
               <div
-                className={`w-5 h-full ${
-                  routine.item.type === "routine"
-                    ? "bg-color_main_text"
-                    : "bg-[#F9D060]"
-                }`}
+                className={`w-5 h-full ${routine.item.type === "routine" ? "bg-color_main_text" : "bg-[#F9D060]"}`}
               ></div>
               {/* 시간 */}
               <div
@@ -101,21 +103,14 @@ export default function MainRoutineItem() {
                   onContextMenu={(event) => handleContextMenu(event, routine)}
                 >
                   {/* 내용 */}
-                  <span className=" font-semibold text-color_main_text pt-4">
-                    {routine.item.title}
-                  </span>
+                  <span className=" font-semibold text-color_main_text pt-4">{routine.item.title}</span>
                   {/* 회고 */}
                   <span className=" text-color_sub_text text-sm">
-                    {routine.item.retrospective
-                      ? routine.item.retrospective
-                      : "회고를 입력해주세요"}
+                    {routine.item.retrospective ? routine.item.retrospective : "회고를 입력해주세요"}
                   </span>
                 </div>
                 {/* 체크 */}
-                <AccomplishmentBtn
-                  routine_id={routine.item.id}
-                  accomplishment={routine.accomplishment}
-                />
+                <AccomplishmentBtn routine_id={routine.item.id} accomplishment={routine.accomplishment} date={date} />
               </div>
             </div>
           </React.Fragment>

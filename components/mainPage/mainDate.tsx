@@ -1,14 +1,14 @@
 "use client";
 
-import { D, Today } from "@/API/MAINDATE";
-import { TodayValue } from "@/atom";
+import { pickDateValue } from "@/atom";
 import { useRecoilState } from "recoil";
+import GetWeekDatesWithToday, { WeekDateInfo } from "../hook/getWeekDate";
 
-function achievements(achive: number, date: number) {
+function achievements(achive: number, date: string, today: string) {
   let BgCol = "";
-  if (date === Today) {
+  if (date === today) {
     return "blue-600";
-  } else if (date > Today) {
+  } else if (date > today) {
     return "color_sub_text";
   }
 
@@ -23,21 +23,12 @@ function achievements(achive: number, date: number) {
 }
 
 export default function MainDate() {
-  const [now, setNow] = useRecoilState(TodayValue);
-  // 요일 순서대로 배열 생성
-  const daysOfWeek = ["월", "화", "수", "목", "금", "토", "일"];
+  const [pickDate, setPickDate] = useRecoilState(pickDateValue);
+  const today = pickDate;
+  const dayOfWeek: WeekDateInfo[] = GetWeekDatesWithToday();
 
-  // 요일 순서대로 배열된 데이터 생성
-  const orderedD = daysOfWeek.map((day, index) => {
-    const data = D[index];
-    return {
-      ...data,
-      dayOfWeek: day,
-    };
-  });
-
-  const DateChangeHandler = (date: number) => {
-    setNow(date);
+  const DateChangeHandler = (date: string) => {
+    setPickDate(date);
   };
   return (
     <div className=" w-2/5 flex justify-center space-x-2">
@@ -47,22 +38,22 @@ export default function MainDate() {
       <div className=" bg-green-400 hidden"></div>
       <div className=" bg-color_sub_text hidden"></div>
       <div className=" bg-blue-600 hidden"></div>
-      {orderedD.map((d) => {
+      {dayOfWeek.map((day) => {
         return (
           <div
-            key={d.date}
+            key={day.date}
             className="flex flex-col justify-center items-center cursor-pointer"
-            onClick={() => DateChangeHandler(d.date)}
+            onClick={() => DateChangeHandler(day.date)}
           >
             <div
               className={`w-[62px] h-[68px] rounded-lg flex flex-col justify-center items-center ${
-                d.date === now ? " bg-color_bg" : null
+                day.date === pickDate ? " bg-color_bg" : null
               } `}
             >
-              <span className=" text-base font-semibol opacity-60">{d.dayOfWeek}</span>
-              <span className=" text-lg font-semibold">{d.date}</span>
+              <span className=" text-base font-semibol opacity-60">{day.dayOfTheWeek}</span>
+              <span className=" text-lg font-semibold">{day.day}</span>
             </div>
-            <div className={` w-[7px] h-[7px] rounded-full mt-2 bg-${achievements(d.achive, d.date)}`}></div>
+            {/* <div className={` w-[7px] h-[7px] rounded-full mt-2 bg-${achievements(d.achive, d.date, today)}`}></div> */}
           </div>
         );
       })}
