@@ -3,15 +3,15 @@
 import { useState } from "react";
 import SlideBtn from "@/components/shared/slideBtn";
 
-export default function PrivateSet() {
-  const [privateSet, setPrivateSet] = useState(false);
-  const PrivateHandler = () => {
-    setPrivateSet(!privateSet);
-  };
+interface IPrivateSet {
+  privateSet: boolean;
+  privateHandler: () => void;
+}
 
+export default function PrivateSet({ privateSet, privateHandler }: IPrivateSet) {
   return (
     <div>
-      <SlideBtn value={privateSet} onClick={PrivateHandler} />
+      <SlideBtn value={privateSet} onClick={privateHandler} />
     </div>
   );
 }

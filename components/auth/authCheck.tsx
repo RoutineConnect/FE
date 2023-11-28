@@ -5,6 +5,7 @@ import { useRecoilState } from "recoil";
 import { LoginValue } from "@/atom";
 import { useEffect } from "react";
 import { getCookie } from "../utils/setCookie";
+import { setToken } from "@/API/axiosConfig";
 
 // 전체적으로 로그인 상태 확인해주는 함수
 export default function AuthChek() {
@@ -25,11 +26,11 @@ export default function AuthChek() {
     // 로그인이 되어있는 경우
     //  "account/login"링크로 접속시 "/main"으로 이동시킴
     //  "/"링크로 접속시 "/main"으로 이동시킴
+    if (loginToken) {
+      setToken(loginToken);
+    }
     setLoginState(true);
-    if (
-      pathname.toString() === "/" ||
-      pathname.toString() === "/accounts/login"
-    ) {
+    if (pathname.toString() === "/" || pathname.toString() === "/accounts/login") {
       console.log("로그인 됨");
       router.push("/main");
       return;
