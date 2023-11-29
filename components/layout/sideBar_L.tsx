@@ -5,6 +5,7 @@ import IShared from "@/icon/iShared";
 import IFeed from "@/icon/iFeed";
 import ITropy from "@/icon/iTropy";
 import ILogo from "@/icon/iLogo";
+import LogOutBtn from "./function/logOutBtn";
 
 export default function Sidebar_L() {
   return (
@@ -30,9 +31,7 @@ export default function Sidebar_L() {
           <div className=" fill-color_main_text w-[18px]">
             <IShared />
           </div>
-          <span className=" text-sideBar font-semibold ml-3">
-            공유 / 챌린지
-          </span>
+          <span className=" text-sideBar font-semibold ml-3">공유 / 챌린지</span>
         </div>
         {/* Feed */}
         <div className=" flex justify-start mt-7">
@@ -52,6 +51,7 @@ export default function Sidebar_L() {
             </div>
             <span className=" text-sideBar font-semibold ml-3">프로필</span>
           </div>
+          <LogOutBtn />
         </div>
         {/* explain */}
         <div className=" mt-64 flex space-x-2">
@@ -93,9 +93,7 @@ export default function Sidebar_L() {
           {/* contents */}
           <div className=" ml-2">
             {/* username */}
-            <span className=" text-base text-color_default_text font-semibold">
-              Teemo
-            </span>
+            <span className=" text-base text-color_default_text font-semibold">Teemo</span>
             {/* tropy */}
             <div className=" flex items-center">
               {/* icon */}
@@ -103,9 +101,7 @@ export default function Sidebar_L() {
                 <ITropy />
               </div>
               {/* payload */}
-              <span className=" text-sm text-color_sub_text ml-1">
-                the Swift Scout
-              </span>
+              <span className=" text-sm text-color_sub_text ml-1">the Swift Scout</span>
             </div>
           </div>
         </div>
