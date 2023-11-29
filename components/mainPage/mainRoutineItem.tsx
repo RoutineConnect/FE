@@ -79,6 +79,9 @@ export default function MainRoutineItem() {
   if (isError) {
     return <div>어머! 페이지를 찾을수 없어요ㅠㅠ</div>;
   }
+  if (routineArray.length === 0) {
+    return <div>루틴이 없습니다. 루틴을 추가하세요</div>;
+  }
 
   return (
     <div className=" space-y-[20px] w-full ">
@@ -121,7 +124,7 @@ export default function MainRoutineItem() {
                 </div>
                 {/* 체크 */}
                 <AccomplishmentBtn
-                  routine_id={routine.item.id}
+                  routine_id={routine.id}
                   accomplishment={routine.accomplishment}
                   date={date}
                 />
