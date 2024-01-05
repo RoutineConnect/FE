@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import SlideBtn from "../shared/slideBtn";
 
 interface DaysState {
   sunday: boolean;
@@ -13,17 +14,37 @@ interface DaysState {
 interface IRoutineDaySet {
   days: DaysState;
   stateHandler: (day: keyof DaysState) => void;
+  allStateHandler: Dispatch<SetStateAction<DaysState>>;
 }
 
-export default function RoutineDaySet({ days, stateHandler }: IRoutineDaySet) {
+export default function RoutineDaySet({ days, stateHandler, allStateHandler }: IRoutineDaySet) {
   const date = ["일", "월", "화", "수", "목", "금", "토"];
+  const [checkedAll, setCheckedAll] = useState(false);
+  const allCheckHandler = () => {
+    setCheckedAll((prevCheck) => {
+      const newCheckedAll = !prevCheck;
+
+      const updatedDays: DaysState = { ...days };
+      Object.keys(updatedDays).forEach((day) => {
+        updatedDays[day as keyof DaysState] = newCheckedAll;
+      });
+
+      // Set the updated state
+      allStateHandler(updatedDays);
+
+      return newCheckedAll;
+    });
+  };
 
   return (
     <div className="flex flex-col w-full">
       {/* title */}
-      <div>
+      <div className="flex">
         <span className="font-semibold">반복주기</span>
-        <span className=" text-sm text-color_sub_text ml-2">(요일을 클릭 하세요)</span>
+        <span className=" text-sm text-color_sub_text ml-2 mr-2">(요일을 클릭 하세요)</span>
+        <div className=" scale-[0.8]">
+          <SlideBtn value={checkedAll} onClick={allCheckHandler}></SlideBtn>
+        </div>
       </div>
       {/* 요일 wrapper */}
       <div className="flex justify-center">

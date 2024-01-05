@@ -178,7 +178,7 @@ export default function addroutine() {
         </div>
         <Saperator />
         {/* 반복주기 */}
-        <RoutineDaySet days={days} stateHandler={stateHandler} />
+        <RoutineDaySet days={days} stateHandler={stateHandler} allStateHandler={setDays} />
         <Saperator />
         {/* 공개 설정 */}
         <div className=" flex w-full justify-between">
