@@ -14,27 +14,21 @@ export default function LoginUi() {
       <LoginForm />
       {/* 소셜 로그인 */}
       <div className=" mt-2 flex flex-col  w-LoginInput justify-between -z-[99999] ">
-        {/* kakao */}
+        {/* google */}
         <div className="flex justify-center items-center w-LoginInput h-LoginInput p-2 bg-white rounded-xl mt-2 shadow-md">
-          {/* contents Wrapper */}
           <div className=" flex justify-center items-center">
-            {/* 이미지 */}
             <div className=" w-[30px] h-[30px]  relative mx-3">
               <Image src={googleBtn} alt="google" fill={true} />
             </div>
-            {/* text */}
             <span className=" text-[#000000] opacity-85">구글 로그인</span>
           </div>
         </div>
-        {/* google */}
+        {/* kakao */}
         <div className=" flex justify-center items-center w-LoginInput h-LoginInput p-2 bg-kakaoBg rounded-xl mt-2 shadow-md">
-          {/* contents Wrapper */}
           <div className=" flex justify-center items-center">
-            {/* 이미지 */}
             <div className=" w-[36px] h-[36px]  relative mx-2">
               <Image src={kakaoBtn} alt="google" fill={true} />
             </div>
-            {/* text */}
             <span className=" text-black opacity-85">카카오 로그인</span>
           </div>
         </div>

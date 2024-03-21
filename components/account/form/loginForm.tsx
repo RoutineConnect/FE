@@ -14,8 +14,6 @@ export default function LoginForm() {
     register,
     formState: { errors },
     handleSubmit,
-    setValue,
-    setError,
     clearErrors,
   } = useForm<ILoginForm>({
     mode: "onBlur",
