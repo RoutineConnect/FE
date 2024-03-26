@@ -3,6 +3,9 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import ErrorForm from "./errorForm";
 import { useState } from "react";
+import axios from "axios";
+import SignupAPI from "@/Api/account/signupAPI";
+import ExistUserCheckAPI from "@/Api/account/existUserCheckAPI";
 
 interface ISignupForm {
   email: string;
@@ -20,6 +23,7 @@ export default function SignupForm() {
     watch,
     setError,
     getValues,
+    clearErrors,
   } = useForm<ISignupForm>({
     mode: "onBlur",
   });
@@ -32,7 +36,23 @@ export default function SignupForm() {
       });
       return;
     }
-    // 회원가입 api연결
+    clearErrors("result");
+    try {
+      const { email, name, password } = getValues();
+      const response = await SignupAPI({
+        email,
+        name,
+        password,
+      });
+      sessionStorage.setItem("signupEmail", email);
+      sessionStorage.setItem("signupPassword", password);
+      console.log("Response:", response.data);
+      window.location.reload();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        alert(error.response?.data.message);
+      }
+    }
   };
   const watchPassword = watch("password", "");
 
@@ -40,10 +60,31 @@ export default function SignupForm() {
 
   const [isCheckedUser, setIsCheckedUser] = useState(false);
   const existUserCheckHandler = async () => {
-    // 중복체크 확인 api 연결
+    console.log(watchUserEmail, watchPassword);
+    try {
+      const response = await ExistUserCheckAPI(watchUserEmail);
+
+      if (response.data.is_duplicated) {
+        setError("email", {
+          type: "manual",
+          message: response.data.message,
+        });
+      } else {
+        window.alert("사용가능한 아이디입니다.");
+        setIsCheckedUser(true);
+        clearErrors("email");
+        console.log("중복유저 테스트 결과가 수정되었습니다. ", isCheckedUser);
+      }
+    } catch (error) {
+      console.log(error);
+      window.location.reload;
+    }
   };
   return (
-    <form onSubmit={handleSubmit(onSubmitValid)} className=" flex flex-col mt-5">
+    <form
+      onSubmit={handleSubmit(onSubmitValid)}
+      className=" flex flex-col mt-5"
+    >
       <div className="flex w-LoginInput space-x-2">
         <input
           {...register("email", {
@@ -55,7 +96,9 @@ export default function SignupForm() {
           })}
           onChange={() => {
             setIsCheckedUser(false);
-            console.log("작성된 유저 아이디가 변경되어 체크 확인값이 변경되었습니다.");
+            console.log(
+              "작성된 유저 아이디가 변경되어 체크 확인값이 변경되었습니다."
+            );
           }}
           type="text"
           placeholder="이메일"
@@ -94,7 +137,8 @@ export default function SignupForm() {
       <input
         {...register("passwordCheck", {
           required: "비밀번호를 확인 해주세요",
-          validate: (value) => value === watchPassword || "비밀번호가 일치하지 않습니다",
+          validate: (value) =>
+            value === watchPassword || "비밀번호가 일치하지 않습니다",
         })}
         type="password"
         placeholder="비밀번호 확인"
@@ -108,7 +152,10 @@ export default function SignupForm() {
         <ErrorForm message={errors.passwordCheck?.message} />
         <ErrorForm message={errors.result?.message} />
       </div>
-      <button type="submit" className=" w-LoginInput h-LoginInput p-1 mt-2 rounded-md text-white bg-color_main_text">
+      <button
+        type="submit"
+        className=" w-LoginInput h-LoginInput p-1 mt-2 rounded-md text-white bg-color_main_text"
+      >
         회원가입
       </button>
     </form>
