@@ -5,6 +5,7 @@ import ErrorForm from "./errorForm";
 import { useState } from "react";
 import axios from "axios";
 import SignupAPI from "@/Api/account/signupAPI";
+import ExistUserCheckAPI from "@/Api/account/existUserCheckAPI";
 
 interface ISignupForm {
   email: string;
@@ -22,6 +23,7 @@ export default function SignupForm() {
     watch,
     setError,
     getValues,
+    clearErrors,
   } = useForm<ISignupForm>({
     mode: "onBlur",
   });
@@ -34,6 +36,7 @@ export default function SignupForm() {
       });
       return;
     }
+    clearErrors("result");
     try {
       const { email, name, password } = getValues();
       const response = await SignupAPI({
@@ -47,10 +50,7 @@ export default function SignupForm() {
       window.location.reload();
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        setError("result", {
-          type: "serverError",
-          message: "서비스를 불러올 수 없습니다. 잠시후 시도해주세요",
-        });
+        alert(error.response?.data.message);
       }
     }
   };
@@ -60,7 +60,25 @@ export default function SignupForm() {
 
   const [isCheckedUser, setIsCheckedUser] = useState(false);
   const existUserCheckHandler = async () => {
-    // 중복체크 확인 api 연결
+    console.log(watchUserEmail, watchPassword);
+    try {
+      const response = await ExistUserCheckAPI(watchUserEmail);
+
+      if (response.data.is_duplicated) {
+        setError("email", {
+          type: "manual",
+          message: response.data.message,
+        });
+      } else {
+        window.alert("사용가능한 아이디입니다.");
+        setIsCheckedUser(true);
+        clearErrors("email");
+        console.log("중복유저 테스트 결과가 수정되었습니다. ", isCheckedUser);
+      }
+    } catch (error) {
+      console.log(error);
+      window.location.reload;
+    }
   };
   return (
     <form

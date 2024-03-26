@@ -2,6 +2,12 @@
 
 import { SubmitHandler, useForm } from "react-hook-form";
 import ErrorForm from "./errorForm";
+import { useEffect } from "react";
+import LoginAPI from "@/Api/account/loginAPI";
+import { setToken } from "@/Api/instance";
+import { setCookie } from "@/components/util/setCookie";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 interface ILoginForm {
   email: string;
@@ -10,22 +16,62 @@ interface ILoginForm {
 }
 
 export default function LoginForm() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const signupEmail = sessionStorage.getItem("signupEmail");
+    const signupPassword = sessionStorage.getItem("signupPassword");
+    if (signupEmail !== null && signupPassword !== null) {
+      setValue("email", signupEmail);
+      setValue("password", signupPassword);
+      sessionStorage.removeItem("signupEmail");
+      sessionStorage.removeItem("signupPassword");
+    }
+  }, []);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
     clearErrors,
+    setValue,
+    setError,
   } = useForm<ILoginForm>({
     mode: "onBlur",
   });
 
+  const LoggedIn = (token: string) => {
+    setToken(token);
+    setCookie(token);
+    console.log("로그인 성공");
+    router.push("/main");
+  };
+
   const onSubmitValid: SubmitHandler<ILoginForm> = async (data) => {
-    // 로그인 api
+    try {
+      const response = await LoginAPI({
+        email: data.email,
+        password: data.password,
+      });
+      LoggedIn(response.data.token);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.log("상태 : " + error.response?.status);
+        console.log("에러 메시지 : " + error.response?.data);
+        setError("result", {
+          type: "validate",
+          message: error.response?.data,
+        });
+      }
+    }
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmitValid)} className=" flex flex-col mt-5 items-center">
+      <form
+        onSubmit={handleSubmit(onSubmitValid)}
+        className=" flex flex-col mt-5 items-center"
+      >
         {/* id */}
         <input
           {...register("email", {

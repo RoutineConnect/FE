@@ -1,7 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 
-const BASE_URL =
-  "https://xn--b60b50mo0tbqdri.xn--oi2b61z32a.xn--3e0b707e/docs/index.html";
+const BASE_URL = "https://xn--b60b50mo0tbqdri.xn--oi2b61z32a.xn--3e0b707e";
 
 export const publicApi: AxiosInstance = axios.create({
   baseURL: BASE_URL,
