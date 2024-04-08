@@ -3,11 +3,11 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import ErrorForm from "./errorForm";
 import { useEffect } from "react";
-import LoginAPI from "@/Api/account/loginAPI";
-import { setToken } from "@/Api/instance";
-import { setCookie } from "@/components/util/setCookie";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { accountApis } from "@/Api/account/accountAPI";
+import { ILoginRes } from "@/Api/account/accountInterface";
+import { setPrivateTokenCookie, setTokenCookie } from "@/components/util/setCookie";
 
 interface ILoginForm {
   email: string;
@@ -35,43 +35,34 @@ export default function LoginForm() {
     handleSubmit,
     clearErrors,
     setValue,
-    setError,
   } = useForm<ILoginForm>({
     mode: "onBlur",
   });
 
-  const LoggedIn = (token: string) => {
-    setToken(token);
-    setCookie(token);
+  const LoggedIn = (data: ILoginRes) => {
+    setTokenCookie(`${data.type} ${data.access_token}`);
+    setPrivateTokenCookie(data.refresh_token);
     console.log("로그인 성공");
     router.push("/main");
   };
 
   const onSubmitValid: SubmitHandler<ILoginForm> = async (data) => {
     try {
-      const response = await LoginAPI({
+      const res = await accountApis.login({
         email: data.email,
         password: data.password,
       });
-      LoggedIn(response.data.token);
+      LoggedIn(res.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.log("상태 : " + error.response?.status);
-        console.log("에러 메시지 : " + error.response?.data);
-        setError("result", {
-          type: "validate",
-          message: error.response?.data,
-        });
+        alert(error.response?.data.message);
       }
     }
   };
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit(onSubmitValid)}
-        className=" flex flex-col mt-5 items-center"
-      >
+      <form onSubmit={handleSubmit(onSubmitValid)} className=" flex flex-col mt-5 items-center">
         {/* id */}
         <input
           {...register("email", {
