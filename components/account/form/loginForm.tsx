@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { accountApis } from "@/Api/account/accountAPI";
 import { ILoginRes } from "@/Api/account/accountInterface";
-import { setPrivateTokenCookie, setTokenCookie } from "@/components/util/setCookie";
+import { setTokenCookie } from "@/components/util/setCookie";
 
 interface ILoginForm {
   email: string;
@@ -41,7 +41,6 @@ export default function LoginForm() {
 
   const LoggedIn = (data: ILoginRes) => {
     setTokenCookie(`${data.type} ${data.access_token}`);
-    setPrivateTokenCookie(data.refresh_token);
     console.log("로그인 성공");
     router.push("/main");
   };

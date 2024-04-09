@@ -7,18 +7,6 @@ export const setTokenCookie = (token: string) => {
   }
 };
 
-export const setPrivateTokenCookie = (token: string) => {
-  if (typeof document !== "undefined") {
-    const expirationDate = new Date();
-    expirationDate.setTime(expirationDate.getTime() + 60 * 60 * 1000);
-    const expires = "expires=" + expirationDate.toUTCString();
-    const secure = "secure";
-    const httponly = "httponly";
-    document.cookie = "REFRESH_TOKEN" + "=" + token + "; " + expires + "; path=/; " + secure + "; " + httponly;
-    // document.cookie = "REFRESH_TOKEN" + "=" + token + "; " + expires + "; path=/" + httponly;
-  }
-};
-
 export const getCookie = (data: string) => {
   if (typeof document !== "undefined" && document !== null) {
     const cookieName = data + "=";

@@ -36,10 +36,7 @@ privateApi.interceptors.response.use(
     } = err;
     if (status === 401) {
       const originRequest = config;
-      const res = await accountApis.getAccessTokenFromRefreshToken({
-        grant_type: "refresh-token",
-        refresh_token: getCookie("REFRESH_TOKEN"),
-      });
+      const res = await accountApis.getAccessTokenFromRefreshToken();
 
       if (res.status === 200) {
         setTokenCookie(res.data.access_token);
@@ -47,7 +44,7 @@ privateApi.interceptors.response.use(
 
         return axios(originRequest);
       }
-      if (res.status === 404) {
+      if (res.status === 401) {
         alert("로그인 기간이 만료되었습니다. 다시 로그인하세요.");
         window.location.replace("/account");
       }
@@ -55,16 +52,3 @@ privateApi.interceptors.response.use(
     return Promise.reject(err);
   }
 );
-
-const getNewAccessToken = async () => {
-  const refresh_token = getCookie("REFRESH_TOKEN");
-
-  const res = await accountApis.getAccessTokenFromRefreshToken({
-    grant_type: "refresh-token",
-    refresh_token,
-  });
-
-  if (res.status === 200) {
-    privateApi.defaults.headers.common.Authorization = `${res.data.type} ${res.data.access_token}`;
-  }
-};

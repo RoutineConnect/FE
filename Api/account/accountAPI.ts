@@ -5,7 +5,6 @@ import {
   IExistEmailCheckRes,
   IExistNameCheckReq,
   IExistNameCheckRes,
-  IGetRefreshTokenReq,
   IGetRefreshTokenRes,
   ILoginReq,
   ILoginRes,
@@ -15,8 +14,8 @@ import {
 
 export const accountApis = {
   // 토큰 재발급
-  getAccessTokenFromRefreshToken: (data: IGetRefreshTokenReq): Promise<AxiosResponse<IGetRefreshTokenRes>> => {
-    return publicApi.post<IGetRefreshTokenReq, AxiosResponse<IGetRefreshTokenRes>>("/sign-api/access-token", data);
+  getAccessTokenFromRefreshToken: (): Promise<AxiosResponse<IGetRefreshTokenRes>> => {
+    return publicApi.post<null, AxiosResponse<IGetRefreshTokenRes>>("/sign-api/access-token");
   },
 
   // 로그인

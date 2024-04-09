@@ -17,7 +17,6 @@ export interface ILoginReq {
 
 export interface ILoginRes {
   access_token: string;
-  refresh_token: string;
   type: string;
 }
 
