@@ -21,12 +21,12 @@ export const accountApis = {
 
   // 로그인
   login: (data: ILoginReq): Promise<AxiosResponse<ILoginRes>> => {
-    return privateApi.post<ILoginReq, AxiosResponse<ILoginRes>>(`/sign-api/sign-in`, data);
+    return publicApi.post<ILoginReq, AxiosResponse<ILoginRes>>(`/sign-api/sign-in`, data);
   },
 
   // 회원가입
   signup: (data: ISignupReq): Promise<AxiosResponse<ISignupRes>> => {
-    return privateApi.post<ISignupReq, AxiosResponse<ISignupRes>>(`/sign-api/sign-up`, data);
+    return publicApi.post<ISignupReq, AxiosResponse<ISignupRes>>(`/sign-api/sign-up`, data);
   },
 
   // 이메일 중복 체크
